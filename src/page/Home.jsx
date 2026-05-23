@@ -659,7 +659,6 @@ export default function OmAntimNiwasSite() {
                 "Greater Noida NCR",
                 "Dignified Cremation",
                 "Documentation Support",
-                "Pandit Ji Available",
                 "Compassionate Team",
               ].map((t, i) => (
                 <span
@@ -976,7 +975,7 @@ export default function OmAntimNiwasSite() {
                     fontSize: "0.95rem",
                   }}
                 >
-                  <Phone size={16} /> Call Pandit Ji
+                  <Phone size={16} /> Call Us
                 </a>
               </div>
             </div>
