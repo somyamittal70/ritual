@@ -1,1013 +1,1238 @@
-import React, { useState, useEffect } from "react";
-import logo from "../../public/logo.png";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Phone,
-  Mail,
   MapPin,
   Clock,
   Shield,
   Heart,
   Award,
-  ChevronDown,
   Menu,
   X,
   Star,
   Users,
   CheckCircle,
-  Flower2,
-  Headphones,
-  UserCheck,
+  ChevronRight,
+  ArrowRight,
 } from "lucide-react";
 
-const PHONE = "9971466271";
 const PHONE_DISPLAY = "+91 9971466271";
 const PHONE_HREF = "tel:+919971466271";
-const NAME_EN = "Om Antim Niwas Shamshan Bhoomi";
+const NAME_EN = "Om Antim Niwas";
+const NAME_FULL = "Om Antim Niwas Shamshan Bhoomi";
 const NAME_HI = "ॐ अन्तिम निवास शमसान भूमि";
-const PANDIT = "Pandit Ji";
-const ADDRESS =
-  "Sector-2, Gram Patwadi Seva Samiti, Greater Noida West (Gautam Buddha Nagar)";
+const ADDRESS = "Sector-2, Gram Patwadi Seva Samiti, Greater Noida West";
 
-// Refined Dark Red & Golden Palette
-const C = {
-  dark: "#5c1d26", // Deep dark red — primary dark
-  mid: "#bb8744", // True golden — mid tone
-  accent: "#d4a055", // Warm golden accent — slightly lighter
-  light: "#f0d5a0", // Soft gold-cream — text on dark
-  bg: "#fdf6ec", // Warm cream background
-  bgAlt: "#f9f1e3", // Slightly deeper cream
-  white: "#faf6ef", // Off-white with warm golden tint
-};
-
-const ContactSection = () => {
+export default function OmAntimNiwasSite() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const [activeSection, setActiveSection] = useState("home");
+  const [openFaq, setOpenFaq] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     email: "",
-    location: "",
     message: "",
   });
-  const [loading, setLoading] = useState(false);
-  const [successMsg, setSuccessMsg] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-      setSuccessMsg(
-        "Thank you for reaching out. Our team will contact you shortly with compassion and care.",
-      );
-      setFormData({
-        name: "",
-        phone: "",
-        email: "",
-        location: "",
-        message: "",
-      });
-      setLoading(false);
-    }, 1000);
-  };
-
-  return (
-    <section
-      id="contact"
-      className="py-16 lg:py-24"
-      style={{ background: C.bg }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
-          <div
-            className="inline-flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-semibold mb-4"
-            style={{ background: C.light + "60", color: C.dark }}
-          >
-            <Heart size={14} />
-            <span>Reach Out to Us</span>
-          </div>
-          <h2
-            className="font-display text-4xl md:text-5xl font-bold mb-4"
-            style={{ color: C.dark }}
-          >
-            Contact <span style={{ color: C.accent }}>Us Today</span>
-          </h2>
-          <p className="text-lg max-w-xl mx-auto" style={{ color: C.mid }}>
-            Our compassionate team is available 24/7 to assist you with dignity
-            and care.
-          </p>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          <div className="space-y-6">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src="./4.jpg"
-                alt="Support"
-                className="w-full h-[340px] object-cover"
-              />
-              <div
-                className="absolute inset-0"
-                style={{
-                  background: `linear-gradient(to top, ${C.dark}E0 0%, ${C.dark}60 50%, transparent 100%)`,
-                }}
-              ></div>
-              <div className="absolute bottom-6 left-6 right-6 text-white">
-                <h3 className="text-2xl font-bold font-display mb-4">
-                  Quick Contact
-                </h3>
-                <div className="space-y-3">
-                  <a
-                    href={PHONE_HREF}
-                    className="flex items-center space-x-3 p-3 rounded-xl hover:opacity-90 transition-all"
-                    style={{
-                      background: C.mid + "CC",
-                      backdropFilter: "blur(8px)",
-                    }}
-                  >
-                    <div
-                      className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
-                      style={{ background: C.dark }}
-                    >
-                      <Phone size={18} style={{ color: C.light }} />
-                    </div>
-                    <div>
-                      <p className="text-xs" style={{ color: C.light }}>
-                        Call {PANDIT}
-                      </p>
-                      <p className="font-bold" style={{ color: C.white }}>
-                        {PHONE_DISPLAY}
-                      </p>
-                    </div>
-                  </a>
-                  <div
-                    className="flex items-center space-x-3 p-3 rounded-xl"
-                    style={{
-                      background: "rgba(0,0,0,0.35)",
-                      backdropFilter: "blur(8px)",
-                    }}
-                  >
-                    <div
-                      className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
-                      style={{ background: C.mid }}
-                    >
-                      <Clock size={18} style={{ color: C.dark }} />
-                    </div>
-                    <div>
-                      <p className="text-xs" style={{ color: C.light }}>
-                        Service Hours
-                      </p>
-                      <p className="font-bold text-white">24/7 Available</p>
-                    </div>
-                  </div>
-                  <div
-                    className="flex items-center space-x-3 p-3 rounded-xl"
-                    style={{
-                      background: "rgba(0,0,0,0.35)",
-                      backdropFilter: "blur(8px)",
-                    }}
-                  >
-                    <div
-                      className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
-                      style={{ background: C.mid }}
-                    >
-                      <MapPin size={18} style={{ color: C.dark }} />
-                    </div>
-                    <div>
-                      <p className="text-xs" style={{ color: C.light }}>
-                        Address
-                      </p>
-                      <p className="font-bold text-white text-sm">{ADDRESS}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div
-            className="rounded-2xl shadow-xl p-8"
-            style={{ background: C.white, border: `1px solid ${C.light}` }}
-          >
-            <h3
-              className="text-2xl font-bold mb-6 font-display"
-              style={{ color: C.dark }}
-            >
-              Send Us a Message
-            </h3>
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <label
-                  className="block text-sm font-semibold mb-2"
-                  style={{ color: C.mid }}
-                >
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  className="w-full px-4 py-3 rounded-xl outline-none transition-all"
-                  style={{
-                    background: C.bg,
-                    border: `1.5px solid ${C.light}`,
-                    color: C.dark,
-                  }}
-                  placeholder="Your name"
-                />
-              </div>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label
-                    className="block text-sm font-semibold mb-2"
-                    style={{ color: C.mid }}
-                  >
-                    Phone *
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={(e) =>
-                      setFormData({ ...formData, phone: e.target.value })
-                    }
-                    className="w-full px-4 py-3 rounded-xl outline-none transition-all"
-                    style={{
-                      background: C.bg,
-                      border: `1.5px solid ${C.light}`,
-                      color: C.dark,
-                    }}
-                    placeholder="+91"
-                  />
-                </div>
-                <div>
-                  <label
-                    className="block text-sm font-semibold mb-2"
-                    style={{ color: C.mid }}
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    className="w-full px-4 py-3 rounded-xl outline-none transition-all"
-                    style={{
-                      background: C.bg,
-                      border: `1.5px solid ${C.light}`,
-                      color: C.dark,
-                    }}
-                    placeholder="email@example.com"
-                  />
-                </div>
-              </div>
-              <div>
-                <label
-                  className="block text-sm font-semibold mb-2"
-                  style={{ color: C.mid }}
-                >
-                  Location
-                </label>
-                <input
-                  type="text"
-                  value={formData.location}
-                  onChange={(e) =>
-                    setFormData({ ...formData, location: e.target.value })
-                  }
-                  className="w-full px-4 py-3 rounded-xl outline-none transition-all"
-                  style={{
-                    background: C.bg,
-                    border: `1.5px solid ${C.light}`,
-                    color: C.dark,
-                  }}
-                  placeholder="Sector, Noida"
-                />
-              </div>
-              <div>
-                <label
-                  className="block text-sm font-semibold mb-2"
-                  style={{ color: C.mid }}
-                >
-                  Message
-                </label>
-                <textarea
-                  rows="4"
-                  value={formData.message}
-                  onChange={(e) =>
-                    setFormData({ ...formData, message: e.target.value })
-                  }
-                  className="w-full px-4 py-3 rounded-xl outline-none transition-all resize-none"
-                  style={{
-                    background: C.bg,
-                    border: `1.5px solid ${C.light}`,
-                    color: C.dark,
-                  }}
-                  placeholder="How can we help you?"
-                ></textarea>
-              </div>
-              {successMsg && (
-                <p
-                  className="text-sm text-center font-medium p-3 rounded-xl"
-                  style={{ background: C.light + "50", color: C.dark }}
-                >
-                  {successMsg}
-                </p>
-              )}
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full font-bold py-4 rounded-xl transition-all hover:opacity-90 hover:scale-[1.02] shadow-lg text-base disabled:opacity-60"
-                style={{
-                  background: `linear-gradient(135deg, ${C.dark} 0%, ${C.mid} 100%)`,
-                  color: C.light,
-                }}
-              >
-                {loading ? "Sending..." : "Send Message →"}
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default function OmAntimNiwasSite() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [openFaq, setOpenFaq] = useState(null);
-  const [scrolled, setScrolled] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollToSection = (id) => {
+  const goTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    setMobileMenuOpen(false);
+    setMenuOpen(false);
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setFormData({ name: "", phone: "", email: "", message: "" });
+    setTimeout(() => setSubmitted(false), 4000);
+  };
+
+  const services = [
+    {
+      icon: "❄️",
+      title: "Freezer Box",
+      subtitle: "Home & Hospital",
+      desc: "Properly cooled, hygienic freezer boxes available on immediate call, delivered anywhere in NCR.",
+    },
+    {
+      icon: "🚐",
+      title: "Funeral Transport",
+      subtitle: "Respectful Vehicles",
+      desc: "Clean, dignified ambulance and hearse services with trained, compassionate staff.",
+    },
+    {
+      icon: "🕉️",
+      title: "Cremation Rites",
+      subtitle: "All Traditions",
+      desc: "Complete cremation support — rituals, bookings, Pandit Ji, and full ceremony management.",
+    },
+    {
+      icon: "📄",
+      title: "Documentation",
+      subtitle: "Legal Paperwork",
+      desc: "Death certificates, cremation permits, and all required formalities handled end-to-end.",
+    },
+    {
+      icon: "🪔",
+      title: "Ritual Packages",
+      subtitle: "Custom Ceremonies",
+      desc: "Tailored last rites packages honouring your family's customs, traditions, and beliefs.",
+    },
+    {
+      icon: "🚨",
+      title: "24×7 Emergency",
+      subtitle: "Instant Response",
+      desc: "Our team mobilises within minutes — day or night — to bring calm in your hardest hour.",
+    },
+  ];
 
   const faqs = [
     {
-      q: "What funeral services do you provide?",
-      a: "We offer comprehensive funeral services including freezer box rentals, transportation, cremation arrangements, documentation assistance, and complete funeral ceremony coordination.",
+      q: "Are services really available 24 hours?",
+      a: "Yes. Our phone never goes off. Pandit Ji and the full team are reachable any hour of any day.",
     },
     {
-      q: "How quickly can you respond to an emergency call?",
-      a: "Our team is available 24/7 and can respond to any location in Greater Noida West and surrounding areas promptly. We understand the urgency and respond with immediate, compassionate assistance.",
+      q: "Which areas do you cover?",
+      a: "Greater Noida West, Noida Extension, Noida, Ghaziabad, Crossing Republik, and nearby NCR regions.",
     },
     {
-      q: "What is included in your funeral packages?",
-      a: "Our packages include freezer box rental, transportation, documentation support, cremation ground arrangements, priest coordination (Pandit Ji), and all necessary funeral supplies handled with dignity.",
+      q: "Do you help with all religions?",
+      a: "Absolutely. We serve Hindu, Muslim, Christian, Sikh, Jain, and all other communities with equal respect.",
     },
     {
-      q: "Do you assist with legal documentation?",
-      a: "Yes, we provide complete assistance with death certificates, cremation permits, and all required legal documentation. Our experienced team guides you through every step.",
+      q: "What does a typical package include?",
+      a: "Freezer box, transportation, Pandit Ji, cremation ground booking, documentation support, and ash collection.",
     },
     {
-      q: "What are your service charges?",
-      a: "Our pricing is transparent and varies based on the services required. Contact Pandit Ji directly at 9971466271 for a compassionate consultation.",
+      q: "How do I get pricing information?",
+      a: "Call Pandit Ji directly at 9971466271 for a compassionate, transparent consultation with no hidden costs.",
     },
     {
-      q: "Do you serve all communities and religions?",
-      a: "Yes, we respect and serve all communities, religions, and cultural practices. Our team is trained to handle ceremonies according to your specific traditions and beliefs.",
+      q: "How fast can you respond?",
+      a: "Our emergency team coordinates within minutes — we understand every second matters.",
     },
   ];
 
   return (
-    <div className="font-sans" style={{ background: C.bg }}>
+    <div
+      style={{
+        fontFamily: "'Nunito', sans-serif",
+        background: "#fdf6ec",
+        color: "#5c1d26",
+      }}
+    >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@400;500;600;700;800&display=swap');
-        * { font-family: 'Nunito', sans-serif; }
-        .font-display { font-family: 'Cormorant Garamond', serif; }
-
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(28px); }
-          to   { opacity: 1; transform: translateY(0); }
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Nunito:wght@400;500;600;700;800&display=swap');
+        
+        :root {
+          --red: #5c1d26;
+          --gold: #bb8744;
+          --gold-light: #d4a055;
+          --cream: #f0d5a0;
+          --bg: #fdf6ec;
+          --bg2: #f4ebe0;
+          --white: #fffbf5;
         }
-        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-        @keyframes softPulse {
-          0%,100% { opacity:.55; transform:scale(1); }
-          50%      { opacity:.9;  transform:scale(1.12); }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        .display { font-family: 'Playfair Display', serif; }
+
+        /* Reveal animations */
+        .reveal {
+          opacity: 0;
+          transform: translateY(40px);
+          transition: opacity 0.8s ease, transform 0.8s ease;
         }
-        .animate-fadeInUp { animation: fadeInUp .85s ease-out forwards; }
-        .animate-fadeIn   { animation: fadeIn   .6s  ease-out forwards; }
-        .diya-glow        { animation: softPulse 2.8s ease-in-out infinite; }
-
-        .hover-lift { transition: transform .28s ease, box-shadow .28s ease; }
-        .hover-lift:hover { transform: translateY(-5px); box-shadow: 0 14px 36px rgba(92,29,38,.18); }
-
-        .sp-btn {
-          background: linear-gradient(135deg, #5c1d26 0%, #bb8744 100%);
-          color: #f0d5a0;
-          transition: all .28s ease;
+        .reveal.visible {
+          opacity: 1;
+          transform: translateY(0);
         }
-        .sp-btn:hover { opacity:.9; transform:scale(1.03); box-shadow:0 8px 22px rgba(92,29,38,.38); }
+        .reveal-left {
+          opacity: 0;
+          transform: translateX(-50px);
+          transition: opacity 0.9s ease, transform 0.9s ease;
+        }
+        .reveal-left.visible {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        .reveal-right {
+          opacity: 0;
+          transform: translateX(50px);
+          transition: opacity 0.9s ease, transform 0.9s ease;
+        }
+        .reveal-right.visible {
+          opacity: 1;
+          transform: translateX(0);
+        }
 
-        .sp-outline {
+        /* Marquee */
+        @keyframes marquee {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        .marquee-track { animation: marquee 18s linear infinite; }
+
+        /* Float */
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-12px); }
+        }
+        .float { animation: float 4s ease-in-out infinite; }
+
+        /* Shimmer on gold */
+        @keyframes shimmer {
+          0% { background-position: -200% center; }
+          100% { background-position: 200% center; }
+        }
+        .gold-shimmer {
+          background: linear-gradient(90deg, #bb8744 0%, #f0d5a0 40%, #bb8744 60%, #d4a055 100%);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: shimmer 3s linear infinite;
+        }
+
+        /* Pulse ring */
+        @keyframes pulse-ring {
+          0% { transform: scale(1); opacity: 0.7; }
+          100% { transform: scale(1.6); opacity: 0; }
+        }
+        .pulse-ring::before {
+          content: '';
+          position: absolute;
+          inset: -8px;
+          border-radius: 50%;
           border: 2px solid #bb8744;
+          animation: pulse-ring 2s ease-out infinite;
+        }
+
+        /* Card hover */
+        .svc-card {
+          transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease;
+          cursor: default;
+        }
+        .svc-card:hover {
+          transform: translateY(-8px) scale(1.02);
+          box-shadow: 0 24px 60px rgba(92,29,38,0.18);
+        }
+
+        /* Nav link */
+        .nav-link {
+          position: relative;
+          padding: 6px 0;
+          font-weight: 700;
+          font-size: 0.9rem;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: var(--red);
+          text-decoration: none;
+          transition: color 0.2s;
+        }
+        .nav-link::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: var(--gold);
+          border-radius: 2px;
+          transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        /* Diagonal section */
+        .diagonal-top {
+          clip-path: polygon(0 6%, 100% 0%, 100% 100%, 0% 100%);
+          margin-top: -40px;
+          padding-top: 80px;
+        }
+        .diagonal-bottom {
+          clip-path: polygon(0 0%, 100% 0%, 100% 94%, 0% 100%);
+          padding-bottom: 80px;
+        }
+
+        /* Stagger delays */
+        .d1 { transition-delay: 0.1s; }
+        .d2 { transition-delay: 0.2s; }
+        .d3 { transition-delay: 0.3s; }
+        .d4 { transition-delay: 0.4s; }
+        .d5 { transition-delay: 0.5s; }
+        .d6 { transition-delay: 0.6s; }
+
+        /* Counter */
+        @keyframes count-up {
+          from { opacity: 0; transform: scale(0.5); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        .stat-num { animation: count-up 0.6s cubic-bezier(.22,1,.36,1) both; }
+
+        /* Gold btn */
+        .btn-gold {
+          background: linear-gradient(135deg, #bb8744 0%, #d4a055 50%, #bb8744 100%);
+          background-size: 200% auto;
           color: #5c1d26;
-          transition: all .25s ease;
-          background: transparent;
+          font-weight: 800;
+          border: none;
+          cursor: pointer;
+          transition: background-position 0.5s ease, transform 0.25s ease, box-shadow 0.25s ease;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
         }
-        .sp-outline:hover { background:#bb8744; color:#faf6ef; }
-
-        .section-divider {
-          width:56px; height:3px; margin:0 auto .9rem;
-          background: linear-gradient(to right, #5c1d26, #f0d5a0, #bb8744);
-          border-radius:2px;
+        .btn-gold:hover {
+          background-position: right center;
+          transform: translateY(-2px);
+          box-shadow: 0 10px 30px rgba(187,135,68,0.45);
         }
 
+        /* Red btn */
+        .btn-red {
+          background: var(--red);
+          color: var(--cream);
+          font-weight: 800;
+          border: none;
+          cursor: pointer;
+          transition: transform 0.25s ease, box-shadow 0.25s ease;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .btn-red:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 30px rgba(92,29,38,0.4);
+        }
+
+        /* Input */
+        input, textarea {
+          background: var(--bg);
+          border: 1.5px solid #e8d5b0;
+          color: var(--red);
+          font-family: 'Nunito', sans-serif;
+          outline: none;
+          transition: border-color 0.2s, box-shadow 0.2s;
+          width: 100%;
+        }
         input:focus, textarea:focus {
-          border-color: #bb8744 !important;
-          box-shadow: 0 0 0 3px rgba(187,135,68,.22);
+          border-color: var(--gold);
+          box-shadow: 0 0 0 3px rgba(187,135,68,0.15);
+        }
+        ::placeholder { color: rgba(92,29,38,0.35); }
+
+        /* Vertical text */
+        .vert-text {
+          writing-mode: vertical-rl;
+          text-orientation: mixed;
+          transform: rotate(180deg);
         }
 
-        .nav-underline::after {
-          content:''; position:absolute; bottom:0; left:0;
-          width:0; height:2px; background:#bb8744;
-          border-radius:2px; transition: width .3s ease;
+        /* Ornament line */
+        .ornament {
+          display: flex;
+          align-items: center;
+          gap: 12px;
         }
-        .nav-underline:hover::after { width:100%; }
+        .ornament::before, .ornament::after {
+          content: '';
+          flex: 1;
+          height: 1px;
+          background: linear-gradient(to right, transparent, #bb8744, transparent);
+        }
+
+        /* FAQ */
+        .faq-body {
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.45s cubic-bezier(.22,1,.36,1), opacity 0.3s ease;
+          opacity: 0;
+        }
+        .faq-body.open {
+          max-height: 200px;
+          opacity: 1;
+        }
+
+        /* Zigzag border */
+        .zigzag-bottom {
+          position: relative;
+        }
+        .zigzag-bottom::after {
+          content: '';
+          position: absolute;
+          bottom: -20px;
+          left: 0;
+          right: 0;
+          height: 20px;
+          background: 
+            linear-gradient(135deg, var(--bg) 25%, transparent 25%) -20px 0,
+            linear-gradient(225deg, var(--bg) 25%, transparent 25%) -20px 0;
+          background-size: 40px 20px;
+          background-color: transparent;
+        }
+
+        @media (max-width: 768px) {
+          .diagonal-top { clip-path: none; margin-top: 0; padding-top: 60px; }
+          .diagonal-bottom { clip-path: none; padding-bottom: 60px; }
+        }
       `}</style>
 
-      {/* ── NAVBAR ── */}
+      {/* ═══════ NAV ═══════ */}
       <nav
-        className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-          scrolled ? "py-2" : "py-3"
-        }`}
         style={{
-          background: scrolled
-            ? "rgba(247, 247, 247, 0.94)"
-            : "rgba(255, 255, 255, 0.8)",
-          backdropFilter: "blur(18px)",
-          borderBottom: "1px solid rgba(187,135,68,0.12)",
-          boxShadow: scrolled
-            ? "0 8px 32px rgba(0,0,0,0.50)"
-            : "0 4px 20px rgba(0,0,0,0.28)",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 100,
+          background:
+            scrollY > 60 ? "rgba(253,246,236,0.97)" : "rgba(253,246,236,0.85)",
+          backdropFilter: "blur(20px)",
+          borderBottom: "1px solid rgba(187,135,68,0.2)",
+          boxShadow: scrollY > 60 ? "0 4px 30px rgba(92,29,38,0.1)" : "none",
+          transition: "all 0.4s ease",
         }}
       >
-        {/* Glow Effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-red-900/5 via-transparent to-amber-700/5 pointer-events-none"></div>
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16 sm:h-20">
-            {/* LOGO */}
-            <div
-              className="flex items-center space-x-4 cursor-pointer group"
-              onClick={() => scrollToSection("home")}
-            >
-              <div
-                className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl
-                  overflow-hidden border border-amber-700/20
-                  bg-gradient-to-br from-[#3a0d14] to-[#1a0508]
-                  shadow-[0_0_25px_rgba(187,135,68,0.10)]
-                  group-hover:scale-105 transition duration-500"
-              >
-                <div className="absolute inset-0 group-hover:transition duration-500"></div>
-                <img
-                  src={logo}
-                  alt="Om Antim Niwas"
-                  className="w-full h-full object-contain p-1 relative z-10"
-                />
-              </div>
-
-              <div>
-                <h1
-                  className="font-display text-xl sm:text-2xl font-bold leading-tight tracking-wide"
-                  style={{
-                    color: "#5c1d26",
-                    textShadow: "0 0 14px rgba(187,135,68,0.18)",
-                  }}
-                >
-                  {NAME_EN}
-                </h1>
-                <p
-                  className="text-sm mt-1 font-semibold"
-                  style={{ color: C.dark + "90" }}
-                >
-                  {NAME_HI}
-                </p>
-              </div>
-            </div>
-
-            {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-2">
-              {["Home", "About", "Services", "Contact"].map((item) => (
-                <button
-                  key={item}
-                  onClick={() => scrollToSection(item.toLowerCase())}
-                  className="relative px-5 py-2.5 text-sm font-semibold rounded-xl
-                    transition-all duration-300 group overflow-hidden"
-                  style={{ color: "#5c1d26" }}
-                >
-                  <span className="absolute inset-0 bg-amber-700/5 opacity-0 group-hover:opacity-100 transition duration-300 rounded-xl"></span>
-                  <span
-                    className="absolute left-1/2 bottom-1 h-[2px] w-0 transition-all duration-300 group-hover:w-8 group-hover:left-[35%]"
-                    style={{ background: C.mid }}
-                  ></span>
-                  <span className="relative z-10">{item}</span>
-                </button>
-              ))}
-
-              {/* CTA */}
-              <a
-                href={PHONE_HREF}
-                className="relative overflow-hidden ml-4 px-6 py-3 rounded-2xl
-                  font-bold text-sm flex items-center space-x-2
-                  border shadow-lg
-                  hover:scale-105 transition-all duration-500 group"
-                style={{
-                  background: `linear-gradient(135deg, ${C.dark} 0%, #7a2833 50%, ${C.dark} 100%)`,
-                  borderColor: "rgba(187,135,68,0.18)",
-                  color: C.light,
-                  boxShadow: `0 0 22px rgba(92,29,38,0.30)`,
-                }}
-              >
-                <span className="absolute -left-20 top-0 h-full w-14 rotate-12 bg-white/15 blur-md group-hover:left-[130%] transition-all duration-1000"></span>
-                <Phone size={16} className="relative z-10" />
-                <span className="relative z-10">Call Now</span>
-              </a>
-            </div>
-
-            {/* Mobile Toggle */}
-            <button
-              className="md:hidden p-2 rounded-xl border"
-              style={{
-                color: C.light,
-                background: "rgba(255,255,255,0.04)",
-                borderColor: "rgba(187,135,68,0.15)",
-              }}
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
+        <div
+          style={{
+            maxWidth: 1280,
+            margin: "0 auto",
+            padding: "0 24px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            height: 72,
+          }}
+        >
+          {/* Logo Area */}
           <div
-            className="md:hidden border-t animate-fadeIn"
+            onClick={() => goTo("home")}
             style={{
-              background: "rgba(20,5,7,0.97)",
-              borderColor: "rgba(187,135,68,0.10)",
-              backdropFilter: "blur(20px)",
+              display: "flex",
+              alignItems: "center",
+              gap: 14,
+              cursor: "pointer",
             }}
           >
-            <div className="px-4 py-6 space-y-3">
-              {["Home", "About", "Services", "Contact"].map((item) => (
-                <button
-                  key={item}
-                  onClick={() => scrollToSection(item.toLowerCase())}
-                  className="block w-full text-left py-3 px-4 font-semibold rounded-xl transition-all duration-300"
-                  style={{ color: "rgba(240,213,160,0.80)" }}
-                >
-                  {item}
-                </button>
-              ))}
-
-              <a
-                href={PHONE_HREF}
-                className="mt-3 px-6 py-3 rounded-2xl font-bold w-full
-                  flex items-center justify-center space-x-2 shadow-lg"
+            {/* Logo Image */}
+            <div
+              style={{
+                width: 48,
+                height: 48,
+                overflow: "hidden",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <img
+                src="/logo.png"
+                alt="Logo"
                 style={{
-                  background: `linear-gradient(135deg, ${C.dark} 0%, #7a2833 100%)`,
-                  color: C.light,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+              />
+            </div>
+
+            <div>
+              <div
+                className="display"
+                style={{
+                  fontSize: "1.15rem",
+                  fontWeight: 700,
+                  color: "#5c1d26",
+                  lineHeight: 1.1,
                 }}
               >
-                <Phone size={18} />
-                <span>
-                  Call {PANDIT}: {PHONE_DISPLAY}
-                </span>
-              </a>
+                {NAME_EN}
+              </div>
+
+              <div
+                style={{
+                  fontSize: "0.68rem",
+                  color: "#bb8744",
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Shamshan Bhoomi
+              </div>
             </div>
+          </div>
+
+          {/* Desktop Nav */}
+          <div
+            style={{ display: "flex", alignItems: "center", gap: 36 }}
+            className="hidden-mobile"
+          >
+            {["Home", "About", "Services", "Contact"].map((n) => (
+              <button
+                key={n}
+                onClick={() => goTo(n.toLowerCase())}
+                className="nav-link"
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                {n}
+              </button>
+            ))}
+            <a
+              href={PHONE_HREF}
+              className="btn-gold"
+              style={{
+                padding: "10px 22px",
+                borderRadius: 12,
+                fontSize: "0.88rem",
+              }}
+            >
+              <Phone size={16} /> Call Now
+            </a>
+          </div>
+
+          {/* Mobile toggle */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{
+              background: "none",
+              border: "1px solid rgba(187,135,68,0.4)",
+              borderRadius: 10,
+              padding: 8,
+              cursor: "pointer",
+              color: "#5c1d26",
+            }}
+            className="show-mobile"
+          >
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
+
+        {/* Mobile menu */}
+        {menuOpen && (
+          <div
+            style={{
+              background: "#fdf6ec",
+              borderTop: "1px solid rgba(187,135,68,0.2)",
+              padding: "20px 24px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 4,
+            }}
+          >
+            {["Home", "About", "Services", "Contact"].map((n) => (
+              <button
+                key={n}
+                onClick={() => goTo(n.toLowerCase())}
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  textAlign: "left",
+                  padding: "12px 0",
+                  fontWeight: 700,
+                  fontSize: "1rem",
+                  color: "#5c1d26",
+                  borderBottom: "1px solid rgba(187,135,68,0.15)",
+                }}
+              >
+                {n}
+              </button>
+            ))}
+            <a
+              href={PHONE_HREF}
+              className="btn-gold"
+              style={{
+                marginTop: 16,
+                padding: "14px 24px",
+                borderRadius: 14,
+                justifyContent: "center",
+                fontSize: "1rem",
+              }}
+            >
+              <Phone size={18} /> {PHONE_DISPLAY}
+            </a>
           </div>
         )}
       </nav>
 
-      {/* ── HERO ── */}
+      {/* ═══════ HERO ═══════ */}
       <section
         id="home"
-        className="pt-16 sm:pt-20 relative min-h-screen overflow-hidden"
-      >
-        <div className="absolute inset-0">
-          <img
-            src="/1.png"
-            alt={NAME_EN}
-            className="w-full h-full object-cover"
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background: `linear-gradient(135deg, ${C.dark}F0 0%, ${C.dark}B8 45%, ${C.mid}80 100%)`,
-            }}
-          ></div>
-        </div>
-
-        <div className="relative z-10 min-h-[calc(100vh-4rem)] flex items-center">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16">
-            <div className="max-w-3xl">
-              <p
-                className="text-xl sm:text-2xl font-bold mb-3 animate-fadeInUp font-display"
-                style={{
-                  animationDelay: ".1s",
-                  color: C.light,
-                  letterSpacing: ".05em",
-                }}
-              >
-                {NAME_HI}
-              </p>
-
-              <h1
-                className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4 animate-fadeInUp"
-                style={{ animationDelay: ".2s" }}
-              >
-                {NAME_EN}
-              </h1>
-
-              <div
-                className="w-20 h-1 rounded-full mb-6 animate-fadeInUp"
-                style={{
-                  background: `linear-gradient(to right, ${C.accent}, ${C.light}, ${C.mid})`,
-                  animationDelay: ".28s",
-                }}
-              ></div>
-              <p
-                className="text-base sm:text-lg mb-8 leading-relaxed animate-fadeInUp"
-                style={{ animationDelay: ".38s", color: C.light + "CC" }}
-              >
-                Providing dignified and compassionate cremation &amp; funeral
-                services with 24/7 availability. We are here to support you with
-                professionalism and deep reverence.
-              </p>
-
-              <div
-                className="inline-flex items-center space-x-2 px-4 py-2 rounded-full mb-8 animate-fadeInUp"
-                style={{
-                  animationDelay: ".43s",
-                  background: C.mid + "28",
-                  border: `1px solid ${C.mid}50`,
-                }}
-              >
-                <MapPin size={14} style={{ color: C.light, flexShrink: 0 }} />
-                <span className="text-sm" style={{ color: C.light + "DD" }}>
-                  {ADDRESS}
-                </span>
-              </div>
-
-              <div
-                className="flex flex-col sm:flex-row gap-4 animate-fadeInUp"
-                style={{ animationDelay: ".5s" }}
-              >
-                <button
-                  onClick={() => scrollToSection("contact")}
-                  className="sp-btn px-8 py-4 rounded-xl font-bold text-lg flex items-center justify-center space-x-2 group shadow-2xl"
-                >
-                  <span>Request Service</span>
-                  <svg
-                    className="w-5 h-5 group-hover:translate-x-1 transition-transform"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M14 5l7 7m0 0l-7 7m7-7H3"
-                    />
-                  </svg>
-                </button>
-                <a
-                  href={PHONE_HREF}
-                  className="px-8 py-4 rounded-xl font-bold text-lg flex items-center justify-center space-x-2 transition-all hover:opacity-80"
-                  style={{
-                    border: `2px solid ${C.mid}80`,
-                    color: C.light,
-                    background: C.mid + "18",
-                  }}
-                >
-                  <Phone size={20} />
-                  <span>{PHONE_DISPLAY}</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-20 hidden sm:block">
-          <div
-            className="w-6 h-10 border-2 rounded-full flex items-start justify-center p-2"
-            style={{ borderColor: C.mid + "60" }}
-          >
-            <div
-              className="w-1.5 h-3 rounded-full"
-              style={{ background: C.mid + "80" }}
-            ></div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── STATS ── */}
-      <section
-        className="py-16 lg:py-20 relative overflow-hidden"
         style={{
-          background: `linear-gradient(135deg, ${C.dark} 0%, #7a3018 50%, ${C.mid} 100%)`,
+          minHeight: "100vh",
+          position: "relative",
+          overflow: "hidden",
+          display: "flex",
+          alignItems: "center",
+          paddingTop: 72,
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              {
-                number: "500+",
-                label: "Families Served",
-                icon: <Users size={24} />,
-              },
-              {
-                number: "24/7",
-                label: "Always Available",
-                icon: <Clock size={24} />,
-              },
-              {
-                number: "10+",
-                label: "Years of Service",
-                icon: <Award size={24} />,
-              },
-              {
-                number: "100%",
-                label: "Dignity Assured",
-                icon: <Star size={24} />,
-              },
-            ].map((stat, idx) => (
-              <div
-                key={idx}
-                className="group text-center p-6 rounded-2xl transition-all duration-500 hover:-translate-y-3 hover:scale-105"
-                style={{
-                  background: "rgba(255,255,255,0.07)",
-                  border: `1px solid ${C.light}25`,
-                  backdropFilter: "blur(10px)",
-                  animation: `fadeUp 0.7s ease forwards`,
-                  animationDelay: `${idx * 0.2}s`,
-                  opacity: 0,
-                }}
-              >
-                {/* Icon */}
-                <div
-                  className="inline-flex items-center justify-center w-14 h-14 rounded-xl mb-4 transition-all duration-500 group-hover:rotate-6 group-hover:scale-110"
-                  style={{
-                    background: C.light + "20",
-                    color: C.light,
-                    boxShadow: `0 0 25px ${C.light}40`,
-                  }}
-                >
-                  {stat.icon}
-                </div>
-
-                {/* Number */}
-                <h3
-                  className="font-display text-4xl font-bold mb-1 transition-all duration-300 group-hover:tracking-wider"
-                  style={{ color: C.light }}
-                >
-                  {stat.number}
-                </h3>
-
-                {/* Label */}
-                <p
-                  className="font-semibold text-sm transition-all duration-300 group-hover:text-white"
-                  style={{ color: C.accent }}
-                >
-                  {stat.label}
-                </p>
-
-                {/* Hover Glow */}
-                <div
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500"
-                  style={{
-                    boxShadow: `0 0 40px ${C.light}25 inset`,
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── ABOUT ── */}
-      <section
-        id="about"
-        className="py-14 sm:py-16 lg:py-24 relative overflow-hidden"
-        style={{ background: C.bg }}
-      >
-        {/* Background Glow */}
+        {/* Background */}
         <div
-          className="absolute -top-20 -left-20 w-52 sm:w-72 h-52 sm:h-72 rounded-full blur-3xl opacity-10 animate-pulse"
-          style={{ background: C.light }}
-        />
-
-        <div
-          className="absolute bottom-0 right-0 w-56 sm:w-80 h-56 sm:h-80 rounded-full blur-3xl opacity-10 animate-pulse"
           style={{
-            background: C.accent,
-            animationDelay: "1s",
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(160deg, #5c1d26 0%, #3a0d14 40%, #1a0508 100%)",
           }}
         />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Heading */}
-          <div
-            className="text-center mb-12 sm:mb-14 opacity-0 animate-fadeUp"
-            style={{
-              animationDelay: "0.2s",
-              animationFillMode: "forwards",
-            }}
-          >
-            <div className="section-divider"></div>
+        {/* Geometric accents */}
+        <div
+          style={{
+            position: "absolute",
+            top: "10%",
+            right: "-5%",
+            width: 500,
+            height: 500,
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(187,135,68,0.15) 0%, transparent 70%)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: "-10%",
+            left: "-5%",
+            width: 400,
+            height: 400,
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(187,135,68,0.08) 0%, transparent 70%)",
+          }}
+        />
 
+        {/* Decorative vertical lines */}
+        {[20, 40, 60, 80].map((p) => (
+          <div
+            key={p}
+            style={{
+              position: "absolute",
+              top: 0,
+              bottom: 0,
+              left: `${p}%`,
+              width: 1,
+              background: "rgba(187,135,68,0.06)",
+            }}
+          />
+        ))}
+
+        {/* Big ornamental Om */}
+        <div
+          className="float"
+          style={{
+            position: "absolute",
+            right: "8%",
+            top: "50%",
+            transform: "translateY(50%)",
+            fontSize: "clamp(160px, 20vw, 280px)",
+            opacity: 0.06,
+            color: "#bb8744",
+            fontFamily: "serif",
+            pointerEvents: "none",
+            lineHeight: 1,
+          }}
+        >
+          ॐ
+        </div>
+
+        <div
+          style={{
+            maxWidth: 1280,
+            margin: "0 auto",
+            padding: "80px 24px",
+            position: "relative",
+            zIndex: 2,
+            width: "100%",
+          }}
+        >
+          <div style={{ maxWidth: 680 }}>
+            {/* Eyebrow */}
             <div
-              className="inline-flex items-center space-x-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold mb-4"
               style={{
-                background: C.light + "60",
-                color: C.dark,
-                backdropFilter: "blur(10px)",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 10,
+                background: "rgba(187,135,68,0.15)",
+                border: "1px solid rgba(187,135,68,0.3)",
+                borderRadius: 40,
+                padding: "8px 20px",
+                marginBottom: 32,
               }}
             >
-              <Heart size={14} />
-              <span>About Our Services</span>
+              <div
+                style={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: "50%",
+                  background: "#bb8744",
+                  animation: "pulse-ring 2s ease-out infinite",
+                  position: "relative",
+                }}
+                className="pulse-ring"
+              />
+              <span
+                style={{
+                  color: "#d4a055",
+                  fontSize: "0.8rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                }}
+              >
+                24×7 Available — Greater Noida & NCR
+              </span>
             </div>
 
-            <h2
-              className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-tight"
-              style={{ color: C.dark }}
+            {/* Headline */}
+            <h1
+              className="display"
+              style={{
+                fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
+                fontWeight: 900,
+                color: "#fffbf5",
+                lineHeight: 1.05,
+                marginBottom: 12,
+              }}
             >
-              Providing{" "}
-              <span style={{ color: C.accent }}>
-                Respectful & Compassionate
-              </span>{" "}
-              Funeral Assistance
-            </h2>
+              Dignified
+            </h1>
+            <h1
+              className="display gold-shimmer"
+              style={{
+                fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
+                fontWeight: 900,
+                lineHeight: 1.05,
+                marginBottom: 12,
+              }}
+            >
+              Last Rites
+            </h1>
+            <h1
+              className="display"
+              style={{
+                fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
+                fontWeight: 900,
+                color: "rgba(255,251,245,0.5)",
+                lineHeight: 1.05,
+                marginBottom: 32,
+                fontStyle: "italic",
+              }}
+            >
+              Services
+            </h1>
+
+            {/* Hindi name badge */}
+            <div
+              style={{
+                display: "inline-block",
+                background: "rgba(187,135,68,0.12)",
+                border: "1px solid rgba(187,135,68,0.25)",
+                borderRadius: 10,
+                padding: "10px 18px",
+                marginBottom: 28,
+              }}
+            >
+              <span
+                style={{
+                  color: "#f0d5a0",
+                  fontSize: "1.05rem",
+                  fontWeight: 600,
+                }}
+              >
+                {NAME_HI}
+              </span>
+            </div>
 
             <p
-              className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed px-2"
-              style={{ color: C.mid }}
+              style={{
+                color: "rgba(240,213,160,0.75)",
+                fontSize: "1.05rem",
+                lineHeight: 1.75,
+                maxWidth: 520,
+                marginBottom: 44,
+              }}
             >
-              We understand the emotional difficulties faced during the loss of
-              a loved one. Our dedicated team is committed to arranging
-              dignified and peaceful last rites services with complete care and
-              support.
+              We stand beside your family in the most difficult moments —
+              arranging peaceful, respectful, and dignified farewells with
+              complete care and compassion.
             </p>
+
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 16,
+                marginBottom: 56,
+              }}
+            >
+              <button
+                onClick={() => goTo("contact")}
+                className="btn-gold"
+                style={{
+                  padding: "16px 36px",
+                  borderRadius: 14,
+                  fontSize: "1rem",
+                }}
+              >
+                Request Service <ArrowRight size={18} />
+              </button>
+              <a
+                href={PHONE_HREF}
+                style={{
+                  padding: "16px 36px",
+                  borderRadius: 14,
+                  fontSize: "1rem",
+                  border: "2px solid rgba(187,135,68,0.4)",
+                  color: "#f0d5a0",
+                  fontWeight: 700,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  textDecoration: "none",
+                  transition: "border-color 0.2s, background 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(187,135,68,0.12)";
+                  e.currentTarget.style.borderColor = "rgba(187,135,68,0.7)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.borderColor = "rgba(187,135,68,0.4)";
+                }}
+              >
+                <Phone size={18} /> {PHONE_DISPLAY}
+              </a>
+            </div>
+
+            {/* Quick stats inline */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 32 }}>
+              {[
+                ["500+", "Families"],
+                ["10+", "Years"],
+                ["24×7", "Support"],
+                ["NCR", "Coverage"],
+              ].map(([n, l]) => (
+                <div key={l}>
+                  <div
+                    className="display"
+                    style={{
+                      fontSize: "1.8rem",
+                      fontWeight: 700,
+                      color: "#bb8744",
+                    }}
+                  >
+                    {n}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "0.78rem",
+                      color: "rgba(240,213,160,0.6)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.08em",
+                      fontWeight: 700,
+                    }}
+                  >
+                    {l}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 32,
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 8,
+          }}
+        >
+          <span
+            style={{
+              color: "rgba(187,135,68,0.5)",
+              fontSize: "0.7rem",
+              textTransform: "uppercase",
+              letterSpacing: "0.15em",
+              fontWeight: 700,
+            }}
+          >
+            Scroll
+          </span>
+          <div
+            style={{
+              width: 1,
+              height: 40,
+              background:
+                "linear-gradient(to bottom, rgba(187,135,68,0.5), transparent)",
+            }}
+          />
+        </div>
+      </section>
+
+      {/* ═══════ MARQUEE STRIP ═══════ */}
+      <div
+        style={{
+          background: "linear-gradient(90deg, #5c1d26, #7a2833)",
+          overflow: "hidden",
+          padding: "14px 0",
+        }}
+      >
+        <div
+          className="marquee-track"
+          style={{ display: "flex", gap: 0, whiteSpace: "nowrap" }}
+        >
+          {[...Array(2)].map((_, ri) => (
+            <span
+              key={ri}
+              style={{ display: "inline-flex", alignItems: "center" }}
+            >
+              {[
+                "Freezer Box Services",
+                "24×7 Emergency",
+                "All Religions Served",
+                "Greater Noida NCR",
+                "Dignified Cremation",
+                "Documentation Support",
+                "Pandit Ji Available",
+                "Compassionate Team",
+              ].map((t, i) => (
+                <span
+                  key={i}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    color: "#f0d5a0",
+                    fontSize: "0.85rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    padding: "0 32px",
+                  }}
+                >
+                  <span style={{ color: "#bb8744", marginRight: 32 }}>✦</span>
+                  {t}
+                </span>
+              ))}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* ═══════ ABOUT ═══════ */}
+      <section
+        id="about"
+        style={{
+          padding: "100px 0",
+          background: "#fdf6ec",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {/* Side ornament */}
+        <div
+          className="vert-text"
+          style={{
+            position: "absolute",
+            left: 16,
+            top: "50%",
+            transform: "translateY(-50%) rotate(180deg)",
+            color: "rgba(187,135,68,0.12)",
+            fontSize: "0.7rem",
+            letterSpacing: "0.2em",
+            fontWeight: 700,
+            textTransform: "uppercase",
+          }}
+        >
+          About • About • About • About • About •
+        </div>
+
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px" }}>
+          {/* Section label */}
+          <div
+            className="ornament reveal"
+            style={{
+              marginBottom: 16,
+              color: "#bb8744",
+              fontSize: "0.75rem",
+              fontWeight: 700,
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+            }}
+          >
+            Our Story
           </div>
 
-          {/* Main Grid */}
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-            {/* Left Images */}
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              {/* Left Column */}
-              <div className="space-y-3 sm:space-y-4">
-                <div className="rounded-2xl overflow-hidden shadow-2xl group hover-lift">
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: 80,
+              alignItems: "center",
+            }}
+          >
+            {/* Left — image mosaic */}
+            <div className="reveal-left" style={{ position: "relative" }}>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gridTemplateRows: "auto auto",
+                  gap: 16,
+                }}
+              >
+                <div
+                  style={{
+                    gridColumn: "1 / 2",
+                    gridRow: "1 / 2",
+                    borderRadius: 20,
+                    overflow: "hidden",
+                    height: 260,
+                    background: "linear-gradient(135deg, #5c1d26, #3a0d14)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
                   <img
                     src="./2.png"
-                    alt="Funeral Service"
-                    className="w-full h-44 sm:h-56 md:h-60 object-cover transition duration-700 group-hover:scale-110"
+                    alt="Service"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                    onError={(e) => {
+                      e.target.style.display = "none";
+                    }}
                   />
                 </div>
-
                 <div
-                  className="p-4 sm:p-6 rounded-2xl text-white shadow-2xl hover-lift"
                   style={{
-                    background: `linear-gradient(135deg, ${C.dark}, #7a2833)`,
+                    gridColumn: "2 / 3",
+                    gridRow: "1 / 3",
+                    borderRadius: 20,
+                    overflow: "hidden",
+                    height: "100%",
+                    minHeight: 340,
+                    background: "linear-gradient(135deg, #bb8744, #d4a055)",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: 32,
+                    textAlign: "center",
                   }}
                 >
-                  <h3
-                    className="font-display text-3xl sm:text-4xl font-bold mb-1"
-                    style={{ color: C.light }}
-                  >
-                    10+
-                  </h3>
-
-                  <p
-                    className="text-xs sm:text-sm tracking-wide"
-                    style={{ color: C.accent }}
-                  >
-                    Years of Trusted Support
-                  </p>
-                </div>
-              </div>
-
-              {/* Right Column */}
-              <div className="space-y-3 sm:space-y-4 mt-6 sm:mt-8">
-                <div
-                  className="p-4 sm:p-6 rounded-2xl shadow-2xl hover-lift"
-                  style={{
-                    background: `linear-gradient(135deg, ${C.mid}, ${C.accent})`,
-                  }}
-                >
-                  <h3
-                    className="font-display text-3xl sm:text-4xl font-bold mb-1"
-                    style={{ color: C.dark }}
-                  >
-                    24×7
-                  </h3>
-
-                  <p
-                    className="text-xs sm:text-sm font-semibold tracking-wide"
-                    style={{ color: C.dark + "CC" }}
-                  >
-                    Immediate Assistance Anytime
-                  </p>
-                </div>
-
-                <div className="rounded-2xl overflow-hidden shadow-2xl group hover-lift">
                   <img
                     src="./3.png"
-                    alt="Care and Respect"
-                    className="w-full h-44 sm:h-56 md:h-60 object-cover transition duration-700 group-hover:scale-110"
+                    alt="Care"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      position: "absolute",
+                      inset: 0,
+                      borderRadius: 20,
+                      opacity: 0.3,
+                    }}
+                    onError={(e) => {}}
                   />
+                  <div style={{ position: "relative" }}>
+                    <div
+                      className="display"
+                      style={{
+                        fontSize: "4.5rem",
+                        fontWeight: 900,
+                        color: "#5c1d26",
+                        lineHeight: 1,
+                      }}
+                    >
+                      10+
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "0.8rem",
+                        fontWeight: 700,
+                        color: "#5c1d26",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.1em",
+                        marginTop: 8,
+                      }}
+                    >
+                      Years of Trusted Service
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    gridColumn: "1 / 2",
+                    gridRow: "2 / 3",
+                    borderRadius: 20,
+                    overflow: "hidden",
+                    height: 120,
+                    background: "#5c1d26",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: 20,
+                  }}
+                >
+                  <div style={{ textAlign: "center" }}>
+                    <div
+                      className="display"
+                      style={{
+                        fontSize: "2rem",
+                        fontWeight: 700,
+                        color: "#bb8744",
+                      }}
+                    >
+                      500+
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "0.7rem",
+                        color: "rgba(240,213,160,0.7)",
+                        fontWeight: 700,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                      }}
+                    >
+                      Families Served
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Content */}
-            <div
-              className="opacity-0 animate-slideRight"
-              style={{
-                animationDelay: "0.4s",
-                animationFillMode: "forwards",
-              }}
-            >
-              <p
-                className="text-base sm:text-lg mb-5 leading-relaxed"
-                style={{ color: C.mid }}
+            {/* Right — text */}
+            <div className="reveal-right">
+              <h2
+                className="display"
+                style={{
+                  fontSize: "clamp(2rem, 4vw, 3.2rem)",
+                  fontWeight: 700,
+                  color: "#5c1d26",
+                  lineHeight: 1.2,
+                  marginBottom: 24,
+                }}
               >
-                <strong style={{ color: C.dark }}>{NAME_EN}</strong> provides
-                complete funeral and cremation arrangements with
-                professionalism, empathy, and devotion.
+                Compassionate Support{" "}
+                <span style={{ color: "#bb8744", fontStyle: "italic" }}>
+                  When You Need It Most
+                </span>
+              </h2>
+              <p
+                style={{
+                  color: "#7a4a30",
+                  lineHeight: 1.8,
+                  marginBottom: 20,
+                  fontSize: "1rem",
+                }}
+              >
+                <strong style={{ color: "#5c1d26" }}>{NAME_FULL}</strong> has
+                been providing dignified funeral and cremation services for over
+                a decade in Greater Noida and the NCR region.
+              </p>
+              <p
+                style={{
+                  color: "#7a4a30",
+                  lineHeight: 1.8,
+                  marginBottom: 36,
+                  fontSize: "1rem",
+                }}
+              >
+                From freezer box arrangements and respectful transportation to
+                pandit coordination, last rites, and documentation — we carry
+                every burden so your family can grieve in peace.
               </p>
 
-              <p
-                className="text-base sm:text-lg mb-7 sm:mb-8 leading-relaxed"
-                style={{ color: C.mid }}
+              {/* Feature list — horizontal chips */}
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 12,
+                  marginBottom: 40,
+                }}
               >
-                From transportation services and freezer box arrangements to
-                pandit assistance, rituals, documentation, and ash collection —
-                we manage every responsibility with sincerity and respect.
-              </p>
-
-              {/* Features */}
-              <div className="space-y-4 mb-8">
                 {[
-                  "Experienced guidance for all religious rituals",
-                  "Quick response and emergency arrangements",
-                  "Transparent and affordable service pricing",
-                  "Support for all communities and traditions",
-                ].map((item, idx) => (
+                  "All Religions",
+                  "NCR-Wide Coverage",
+                  "Transparent Pricing",
+                  "Trained Staff",
+                  "Legal Paperwork",
+                  "Emergency Response",
+                ].map((tag) => (
                   <div
-                    key={idx}
-                    className="flex items-start sm:items-center space-x-3 group"
+                    key={tag}
                     style={{
-                      animation: `fadeUp 0.7s ease forwards`,
-                      animationDelay: `${idx * 0.2}s`,
-                      opacity: 0,
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
+                      background: "rgba(187,135,68,0.1)",
+                      border: "1px solid rgba(187,135,68,0.3)",
+                      borderRadius: 40,
+                      padding: "7px 16px",
                     }}
                   >
-                    <div
-                      className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition duration-300 group-hover:scale-110 mt-0.5 sm:mt-0"
+                    <CheckCircle size={13} color="#bb8744" />
+                    <span
                       style={{
-                        background: C.light,
-                        boxShadow: `0 0 15px ${C.light}50`,
+                        fontSize: "0.82rem",
+                        fontWeight: 700,
+                        color: "#5c1d26",
                       }}
                     >
-                      <CheckCircle size={15} style={{ color: C.dark }} />
-                    </div>
-
-                    <p
-                      className="text-sm sm:text-base font-medium leading-relaxed transition duration-300 group-hover:translate-x-1"
-                      style={{ color: C.dark }}
-                    >
-                      {item}
-                    </p>
+                      {tag}
+                    </span>
                   </div>
                 ))}
               </div>
 
-              {/* Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
                 <button
-                  onClick={() => scrollToSection("contact")}
-                  className="sp-btn px-7 sm:px-8 py-3.5 rounded-xl font-bold shadow-xl transition-all duration-500 hover:scale-105 hover:-translate-y-1 text-sm sm:text-base"
+                  onClick={() => goTo("services")}
+                  className="btn-gold"
+                  style={{
+                    padding: "14px 32px",
+                    borderRadius: 12,
+                    fontSize: "0.95rem",
+                  }}
                 >
-                  Contact Us →
+                  View Services <ChevronRight size={16} />
                 </button>
-
                 <a
                   href={PHONE_HREF}
-                  className="sp-outline px-7 sm:px-8 py-3.5 rounded-xl font-bold flex items-center justify-center space-x-2 transition-all duration-500 hover:scale-105 hover:-translate-y-1 text-sm sm:text-base"
+                  className="btn-red"
+                  style={{
+                    padding: "14px 32px",
+                    borderRadius: 12,
+                    fontSize: "0.95rem",
+                  }}
                 >
-                  <Phone size={18} />
-                  <span>Call Now</span>
+                  <Phone size={16} /> Call Pandit Ji
                 </a>
               </div>
             </div>
@@ -1015,1183 +1240,1353 @@ export default function OmAntimNiwasSite() {
         </div>
       </section>
 
-      {/* ── WHY CHOOSE US ── */}
-      <section
-        className="py-16 lg:py-24 relative overflow-hidden"
-        style={{
-          background: `linear-gradient(135deg, ${C.dark} 0%, #3d1218 50%, ${C.dark} 100%)`,
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Heading */}
-          <div
-            className="text-center mb-16 opacity-0 animate-fadeUp"
-            style={{ animationDelay: "0.2s", animationFillMode: "forwards" }}
-          >
-            <div
-              className="section-divider"
-              style={{
-                background: `linear-gradient(to right, ${C.accent}, ${C.light}, ${C.mid})`,
-              }}
-            ></div>
-
-            <h2
-              className="font-display text-4xl md:text-5xl font-bold mb-4"
-              style={{ color: C.light }}
-            >
-              Why People{" "}
-              <span style={{ color: C.accent }}>Choose Our Services</span>
-            </h2>
-
-            <p
-              className="text-lg max-w-2xl mx-auto leading-relaxed"
-              style={{ color: C.accent + "BB" }}
-            >
-              We provide respectful funeral arrangements with complete support,
-              ensuring every ceremony is conducted peacefully and with dignity.
-            </p>
-          </div>
-
-          {/* Main Cards */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                icon: <Headphones size={28} />,
-                title: "24×7 Immediate Support",
-                desc: "Our team remains available day and night to assist families during difficult moments with quick response.",
-              },
-              {
-                icon: <Shield size={28} />,
-                title: "Reliable & Respectful",
-                desc: "Every ritual and arrangement is managed with professionalism, sincerity, and complete respect.",
-              },
-              {
-                icon: <Award size={28} />,
-                title: "All Religious Traditions",
-                desc: "We organize ceremonies according to customs, traditions, and religious practices of every community.",
-              },
-              {
-                icon: <UserCheck size={28} />,
-                title: "Complete Assistance",
-                desc: "From transportation to rituals and documentation, we manage every responsibility carefully.",
-              },
-            ].map((f, idx) => (
-              <div
-                key={idx}
-                className="group relative p-7 rounded-3xl overflow-hidden transition-all duration-700 hover:-translate-y-4 hover:scale-[1.03]"
-                style={{
-                  background: "rgba(255,255,255,0.06)",
-                  border: `1px solid ${C.mid}30`,
-                  backdropFilter: "blur(12px)",
-                  animation: `fadeUp 0.8s ease forwards`,
-                  animationDelay: `${idx * 0.2}s`,
-                  opacity: 0,
-                }}
-              >
-                {/* Hover Glow */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-700"
-                  style={{
-                    background: `radial-gradient(circle at top, ${C.light}15, transparent 70%)`,
-                  }}
-                />
-
-                {/* Icon */}
-                <div
-                  className="relative w-16 h-16 rounded-2xl flex items-center justify-center mb-5 transition-all duration-500 group-hover:rotate-6 group-hover:scale-110"
-                  style={{
-                    background: C.mid + "25",
-                    color: C.light,
-                    boxShadow: `0 0 25px ${C.light}25`,
-                  }}
-                >
-                  {f.icon}
-                </div>
-
-                {/* Title */}
-                <h3
-                  className="relative text-xl font-bold mb-3 font-display transition duration-300 group-hover:translate-x-1"
-                  style={{ color: C.light }}
-                >
-                  {f.title}
-                </h3>
-
-                {/* Desc */}
-                <p
-                  className="relative text-sm leading-relaxed"
-                  style={{ color: C.accent + "BB" }}
-                >
-                  {f.desc}
-                </p>
-
-                {/* Bottom Line */}
-                <div
-                  className="relative mt-5 w-0 group-hover:w-16 h-0.5 rounded-full transition-all duration-500"
-                  style={{ background: C.mid }}
-                ></div>
-              </div>
-            ))}
-          </div>
-
-          {/* Bottom Info Cards */}
-          <div className="mt-14 grid sm:grid-cols-3 gap-6">
-            {[
-              {
-                icon: "⚡",
-                title: "Quick Arrangements",
-                desc: "Fast coordination for ambulance, freezer box, and cremation arrangements.",
-              },
-              {
-                icon: "📄",
-                title: "Paperwork Assistance",
-                desc: "Support for certificates, permissions, and important formalities during the process.",
-              },
-              {
-                icon: "🕊️",
-                title: "Peaceful Farewell",
-                desc: "We help families conduct respectful and calm final ceremonies with complete care.",
-              },
-            ].map((item, idx) => (
-              <div
-                key={idx}
-                className="group p-6 rounded-2xl flex items-start space-x-4 transition-all duration-500 hover:-translate-y-2"
-                style={{
-                  background: "rgba(255,255,255,0.05)",
-                  border: `1px solid ${C.mid}35`,
-                  backdropFilter: "blur(10px)",
-                  animation: `fadeUp 0.8s ease forwards`,
-                  animationDelay: `${0.8 + idx * 0.2}s`,
-                  opacity: 0,
-                }}
-              >
-                {/* Icon */}
-                <div className="text-4xl flex-shrink-0 transition duration-500 group-hover:scale-125 group-hover:rotate-6">
-                  {item.icon}
-                </div>
-
-                {/* Content */}
-                <div>
-                  <h4
-                    className="font-bold mb-2 text-lg transition duration-300 group-hover:translate-x-1"
-                    style={{ color: C.light }}
-                  >
-                    {item.title}
-                  </h4>
-
-                  <p
-                    className="text-sm leading-relaxed"
-                    style={{ color: C.accent + "AA" }}
-                  >
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── SERVICES ── */}
+      {/* ═══════ SERVICES ═══════ */}
       <section
         id="services"
-        className="py-16 lg:py-24 relative overflow-hidden"
-        style={{ background: C.bgAlt }}
+        style={{
+          padding: "100px 0",
+          background: "#5c1d26",
+          position: "relative",
+          overflow: "hidden",
+        }}
       >
-        {/* Background Glow Effects */}
+        {/* Background texture */}
         <div
-          className="absolute top-0 left-0 w-96 h-96 rounded-full blur-3xl opacity-10 animate-pulse"
-          style={{ background: C.light }}
-        />
-
-        <div
-          className="absolute bottom-0 right-0 w-80 h-80 rounded-full blur-3xl opacity-10 animate-pulse"
           style={{
-            background: C.accent,
-            animationDelay: "1s",
+            position: "absolute",
+            inset: 0,
+            backgroundImage:
+              "radial-gradient(rgba(187,135,68,0.06) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            width: 500,
+            height: 500,
+            background:
+              "radial-gradient(circle, rgba(187,135,68,0.08) 0%, transparent 65%)",
           }}
         />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Heading */}
-          <div
-            className="text-center mb-16 opacity-0 animate-fadeUp"
-            style={{ animationDelay: "0.2s", animationFillMode: "forwards" }}
-          >
-            <div className="section-divider"></div>
-
+        <div
+          style={{
+            maxWidth: 1280,
+            margin: "0 auto",
+            padding: "0 24px",
+            position: "relative",
+            zIndex: 2,
+          }}
+        >
+          {/* Header */}
+          <div style={{ textAlign: "center", marginBottom: 64 }}>
             <div
-              className="inline-flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-bold mb-4"
+              className="ornament reveal"
               style={{
-                background: C.light + "70",
-                color: C.dark,
-                backdropFilter: "blur(10px)",
+                color: "#bb8744",
+                fontSize: "0.75rem",
+                fontWeight: 700,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                marginBottom: 20,
+                justifyContent: "center",
               }}
             >
-              <Flower2 size={14} />
-              <span>Our Professional Services</span>
+              Professional Services
             </div>
-
             <h2
-              className="font-display text-4xl md:text-5xl font-bold mb-4"
-              style={{ color: C.dark }}
+              className="display reveal"
+              style={{
+                fontSize: "clamp(2.2rem, 5vw, 3.8rem)",
+                fontWeight: 900,
+                color: "#f0d5a0",
+                lineHeight: 1.15,
+              }}
             >
-              Complete{" "}
-              <span style={{ color: C.accent }}>
-                Funeral & Cremation Assistance
-              </span>
+              Everything Your Family
+              <br />
+              <span style={{ color: "#bb8744" }}>Needs, Arranged for You</span>
             </h2>
-
-            <p
-              className="text-lg max-w-2xl mx-auto leading-relaxed"
-              style={{ color: C.mid }}
-            >
-              We provide complete end-to-end funeral arrangements with
-              compassion, professionalism, and peaceful support for grieving
-              families.
-            </p>
           </div>
 
-          {/* Service Cards */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
-            {[
-              {
-                icon: "❄️",
-                title: "Freezer Box Services",
-                desc: "Well-maintained freezer boxes with proper cooling arrangements available for homes and hospitals.",
-              },
-              {
-                icon: "🚨",
-                title: "24×7 Emergency Help",
-                desc: "Immediate assistance anytime with quick coordination and compassionate support during emergencies.",
-              },
-              {
-                icon: "🚐",
-                title: "Funeral Transportation",
-                desc: "Respectful transportation arrangements with clean vehicles and professional staff assistance.",
-              },
-              {
-                icon: "🕉️",
-                title: "Cremation Arrangements",
-                desc: "Complete cremation support including rituals, booking assistance, and ceremony management.",
-              },
-              {
-                icon: "📄",
-                title: "Documentation Support",
-                desc: "Guidance for certificates, permissions, paperwork, and all necessary formal procedures.",
-              },
-              {
-                icon: "🪔",
-                title: "Complete Ritual Packages",
-                desc: "End-to-end arrangements for all last rites ceremonies handled with devotion and dignity.",
-              },
-            ].map((s, idx) => (
+          {/* Services grid — 3-col with left accent bar */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+              gap: 24,
+            }}
+          >
+            {services.map((s, i) => (
               <div
-                key={idx}
-                className="group relative p-7 rounded-3xl overflow-hidden transition-all duration-700 hover:-translate-y-4 hover:shadow-2xl"
+                key={i}
+                className={`svc-card reveal d${(i % 6) + 1}`}
                 style={{
-                  background: "rgba(255,255,255,0.75)",
-                  border: `1px solid ${C.light}`,
-                  backdropFilter: "blur(12px)",
-                  animation: `fadeUp 0.8s ease forwards`,
-                  animationDelay: `${idx * 0.15}s`,
-                  opacity: 0,
+                  background: "rgba(255,251,245,0.04)",
+                  border: "1px solid rgba(187,135,68,0.2)",
+                  borderRadius: 20,
+                  padding: "32px 28px",
+                  position: "relative",
+                  overflow: "hidden",
                 }}
               >
-                {/* Hover Gradient */}
+                {/* Left accent bar */}
                 <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-700"
                   style={{
-                    background: `linear-gradient(135deg, ${C.light}15, transparent 70%)`,
+                    position: "absolute",
+                    left: 0,
+                    top: 24,
+                    bottom: 24,
+                    width: 3,
+                    background:
+                      "linear-gradient(to bottom, #bb8744, rgba(187,135,68,0.2))",
+                    borderRadius: "0 4px 4px 0",
                   }}
                 />
 
-                {/* Icon */}
-                <div className="relative text-5xl mb-5 transition-all duration-500 group-hover:scale-105 group-hover:-rotate-6">
+                <div style={{ fontSize: "2.5rem", marginBottom: 16 }}>
                   {s.icon}
                 </div>
-
-                {/* Title */}
+                <div
+                  style={{
+                    fontSize: "0.7rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    color: "#bb8744",
+                    marginBottom: 8,
+                  }}
+                >
+                  {s.subtitle}
+                </div>
                 <h3
-                  className="relative font-display text-2xl font-bold mb-3 transition duration-300 group-hover:translate-x-1"
-                  style={{ color: C.dark }}
+                  className="display"
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: 700,
+                    color: "#f0d5a0",
+                    marginBottom: 12,
+                  }}
                 >
                   {s.title}
                 </h3>
-
-                {/* Description */}
                 <p
-                  className="relative text-sm leading-relaxed"
-                  style={{ color: C.mid }}
+                  style={{
+                    fontSize: "0.9rem",
+                    color: "rgba(240,213,160,0.6)",
+                    lineHeight: 1.7,
+                  }}
                 >
                   {s.desc}
                 </p>
-
-                {/* Bottom Accent Line */}
-                <div
-                  className="relative mt-6 w-0 group-hover:w-16 h-1 rounded-full transition-all duration-500"
-                  style={{
-                    background: `linear-gradient(to right, ${C.accent}, ${C.light})`,
-                  }}
-                ></div>
-
-                {/* Glow Border */}
-                <div
-                  className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition duration-700"
-                  style={{
-                    boxShadow: `0 0 35px ${C.light}35 inset`,
-                  }}
-                />
               </div>
             ))}
           </div>
 
           {/* CTA */}
           <div
-            className="text-center mt-14 opacity-0 animate-fadeUp"
-            style={{ animationDelay: "1s", animationFillMode: "forwards" }}
+            className="reveal"
+            style={{ textAlign: "center", marginTop: 60 }}
           >
             <button
-              onClick={() => scrollToSection("contact")}
-              className="sp-btn px-10 py-4 rounded-2xl font-bold text-lg shadow-2xl transition-all duration-500 hover:scale-105 hover:-translate-y-1"
+              onClick={() => goTo("contact")}
+              className="btn-gold"
+              style={{
+                padding: "18px 48px",
+                borderRadius: 16,
+                fontSize: "1.05rem",
+              }}
             >
-              Request Assistance Now →
+              Request Assistance <ArrowRight size={20} />
             </button>
           </div>
         </div>
       </section>
 
-      {/* ── CTA BANNER ── */}
-      <section className="relative overflow-hidden min-h-[320px] flex items-center">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src="/2.png"
-            alt="Support"
-            className="w-full h-full object-cover scale-105 animate-slowZoom"
-          />
-
-          {/* Dark Overlay */}
+      {/* ═══════ WHY US — Horizontal scrolling cards ═══════ */}
+      <section
+        style={{
+          padding: "100px 0",
+          background: "#f4ebe0",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px" }}>
           <div
-            className="absolute inset-0"
             style={{
-              background: `linear-gradient(135deg, ${C.dark}F2 0%, ${C.dark}D9 45%, ${C.mid}AA 100%)`,
+              display: "grid",
+              gridTemplateColumns: "1fr 2fr",
+              gap: 60,
+              alignItems: "center",
             }}
-          ></div>
-
-          {/* Animated Glow */}
-          <div
-            className="absolute -top-20 -left-20 w-96 h-96 rounded-full blur-3xl opacity-10 animate-pulse"
-            style={{ background: C.light }}
-          />
-
-          <div
-            className="absolute bottom-0 right-0 w-80 h-80 rounded-full blur-3xl opacity-10 animate-pulse"
-            style={{
-              background: C.accent,
-              animationDelay: "1s",
-            }}
-          />
-        </div>
-
-        {/* Content */}
-        <div className="relative z-10 w-full">
-          <div className="max-w-6xl mx-auto px-2 sm:px-4 lg:px-6">
-            <div
-              className="max-w-xl opacity-0 animate-fadeUp"
-              style={{ animationDelay: "0.2s", animationFillMode: "forwards" }}
-            >
-              {/* Glass Card */}
+          >
+            {/* Left sticky headline */}
+            <div className="reveal-left">
               <div
-                className="relative p-4 m-3 rounded-[30px] overflow-hidden shadow-2xl border"
                 style={{
-                  background: "rgba(15,15,15,0.55)",
-                  backdropFilter: "blur(18px)",
-                  borderColor: `${C.mid}40`,
+                  fontSize: "0.75rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.15em",
+                  textTransform: "uppercase",
+                  color: "#bb8744",
+                  marginBottom: 16,
                 }}
               >
-                {/* Card Glow */}
-                <div
-                  className="absolute inset-0 opacity-30"
-                  style={{
-                    background: `linear-gradient(135deg, ${C.light}08, transparent 60%)`,
-                  }}
-                />
+                WHY CHOOSE US
+              </div>
+              <h2
+                className="display"
+                style={{
+                  fontSize: "clamp(2rem, 4vw, 3rem)",
+                  fontWeight: 900,
+                  color: "#5c1d26",
+                  lineHeight: 1.2,
+                  marginBottom: 24,
+                }}
+              >
+                Trusted by Families
+                <br />
+                <span style={{ color: "#bb8744", fontStyle: "italic" }}>
+                  Across NCR
+                </span>
+              </h2>
+              <p
+                style={{ color: "#7a4a30", lineHeight: 1.8, marginBottom: 36 }}
+              >
+                In grief, the last thing you need is confusion. We handle
+                everything — so you can be present for your family.
+              </p>
+              <a
+                href={PHONE_HREF}
+                className="btn-red"
+                style={{
+                  padding: "14px 32px",
+                  borderRadius: 12,
+                  fontSize: "0.95rem",
+                }}
+              >
+                <Phone size={16} /> Talk to Us
+              </a>
+            </div>
 
-                {/* Badge */}
+            {/* Right — stacked feature rows */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+              {[
+                {
+                  num: "01",
+                  icon: "⚡",
+                  title: "Instant Response",
+                  desc: "Our team mobilises within minutes of your call, any time — day or night.",
+                },
+                {
+                  num: "02",
+                  icon: "🛡️",
+                  title: "Transparent Pricing",
+                  desc: "No hidden costs, no pressure. Clear, compassionate consultation upfront.",
+                },
+                {
+                  num: "03",
+                  icon: "🕊️",
+                  title: "All Communities Welcome",
+                  desc: "Hindu, Muslim, Sikh, Christian — every tradition handled with equal respect.",
+                },
+                {
+                  num: "04",
+                  icon: "📋",
+                  title: "End-to-End Care",
+                  desc: "Transport, rituals, documentation, ash collection — nothing left for you to arrange alone.",
+                },
+              ].map((f, i) => (
                 <div
-                  className="relative inline-flex items-center space-x-2 px-4 py-2 rounded-full text-xs font-semibold mb-5"
+                  key={i}
+                  className={`reveal d${i + 1}`}
                   style={{
-                    background: C.mid + "22",
-                    color: C.light,
-                    border: `1px solid ${C.mid}45`,
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: 20,
+                    background: "#fffbf5",
+                    borderRadius: 18,
+                    padding: "24px 28px",
+                    border: "1px solid rgba(187,135,68,0.15)",
+                    transition: "box-shadow 0.3s ease, transform 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow =
+                      "0 8px 32px rgba(92,29,38,0.12)";
+                    e.currentTarget.style.transform = "translateX(6px)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = "none";
+                    e.currentTarget.style.transform = "translateX(0)";
                   }}
                 >
-                  <Phone size={13} className="animate-pulse" />
-                  <span>24×7 Emergency Assistance</span>
-                </div>
-
-                {/* Heading */}
-                <h2 className="relative font-display text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight">
-                  Need{" "}
-                  <span style={{ color: C.accent }}>
-                    Immediate Funeral Support?
-                  </span>
-                </h2>
-
-                {/* Description */}
-                <p
-                  className="relative text-base sm:text-lg mb-6 leading-relaxed"
-                  style={{ color: C.light + "CC" }}
-                >
-                  Our experienced team is available anytime to provide peaceful,
-                  respectful, and immediate funeral assistance with complete
-                  guidance and care for your family.
-                </p>
-
-                {/* Buttons */}
-                <div className="relative flex flex-col sm:flex-row gap-4 mb-7">
-                  <a
-                    href={PHONE_HREF}
-                    className="group flex items-center justify-center space-x-3 px-6 py-4 rounded-2xl font-bold text-sm transition-all duration-500 hover:scale-105 hover:-translate-y-1"
+                  <div
                     style={{
-                      background: C.mid + "30",
-                      border: `1px solid ${C.mid}60`,
-                      color: C.light,
+                      fontSize: "0.7rem",
+                      fontWeight: 900,
+                      color: "rgba(187,135,68,0.35)",
+                      fontFamily: "monospace",
+                      minWidth: 28,
+                      paddingTop: 4,
                     }}
                   >
-                    <Phone
-                      size={18}
-                      className="transition duration-500 group-hover:rotate-12"
-                    />
-                    <span>{PHONE_DISPLAY}</span>
-                  </a>
-
-                  <button
-                    onClick={() => scrollToSection("contact")}
-                    className="sp-btn px-6 py-4 rounded-2xl font-bold text-sm flex items-center justify-center space-x-2 transition-all duration-500 hover:scale-105 hover:-translate-y-1 shadow-2xl"
-                  >
-                    <Mail size={18} />
-                    <span>Contact Us</span>
-                  </button>
-                </div>
-
-                {/* Bottom Stats */}
-                <div
-                  className="relative grid grid-cols-3 gap-4 pt-5"
-                  style={{ borderTop: `1px solid ${C.mid}30` }}
-                >
-                  {[
-                    {
-                      icon: <Clock size={15} />,
-                      t: "24×7",
-                      s: "Available",
-                    },
-                    {
-                      icon: <Shield size={15} />,
-                      t: "Trusted",
-                      s: "Service",
-                    },
-                    {
-                      icon: <Heart size={15} />,
-                      t: "10+ Years",
-                      s: "Experience",
-                    },
-                  ].map((x, i) => (
+                    {f.num}
+                  </div>
+                  <div style={{ fontSize: "1.6rem", minWidth: 32 }}>
+                    {f.icon}
+                  </div>
+                  <div>
                     <div
-                      key={i}
-                      className="group text-center transition duration-500 hover:-translate-y-1"
+                      style={{
+                        fontWeight: 800,
+                        fontSize: "1.05rem",
+                        color: "#5c1d26",
+                        marginBottom: 6,
+                      }}
                     >
-                      <div
-                        className="inline-flex items-center justify-center w-10 h-10 rounded-xl mb-2 transition duration-500 group-hover:scale-110"
-                        style={{
-                          background: C.mid + "20",
-                          color: C.light,
-                          boxShadow: `0 0 20px ${C.light}15`,
-                        }}
-                      >
-                        {x.icon}
-                      </div>
-
-                      <p
-                        className="font-bold text-sm"
-                        style={{ color: C.light }}
-                      >
-                        {x.t}
-                      </p>
-
-                      <p className="text-xs" style={{ color: C.accent + "90" }}>
-                        {x.s}
-                      </p>
+                      {f.title}
                     </div>
-                  ))}
+                    <div
+                      style={{
+                        fontSize: "0.9rem",
+                        color: "#7a4a30",
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      {f.desc}
+                    </div>
+                  </div>
                 </div>
-
-                {/* Decorative Border Glow */}
-                <div
-                  className="absolute inset-0 rounded-[30px] opacity-20"
-                  style={{
-                    boxShadow: `0 0 40px ${C.light}20 inset`,
-                  }}
-                />
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── CONTACT ── */}
-      <ContactSection />
-
-      {/* ── MAP SECTION ── */}
+      {/* ═══════ CTA FULL-BLEED ═══════ */}
       <section
-        className="py-16 lg:py-24 relative overflow-hidden"
-        style={{ background: C.bgAlt }}
+        style={{
+          background:
+            "linear-gradient(135deg, #3a0d14 0%, #5c1d26 50%, #7a3018 100%)",
+          padding: "80px 24px",
+          textAlign: "center",
+          position: "relative",
+          overflow: "hidden",
+        }}
       >
-        {/* Background Glow */}
         <div
-          className="absolute top-0 left-0 w-96 h-96 rounded-full blur-3xl opacity-10 animate-pulse"
-          style={{ background: C.light }}
-        />
-
-        <div
-          className="absolute bottom-0 right-0 w-80 h-80 rounded-full blur-3xl opacity-10 animate-pulse"
           style={{
-            background: C.accent,
-            animationDelay: "1s",
+            position: "absolute",
+            inset: 0,
+            backgroundImage:
+              "radial-gradient(rgba(240,213,160,0.04) 1.5px, transparent 1.5px)",
+            backgroundSize: "20px 20px",
           }}
         />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Heading */}
+        <div
+          className="float"
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 600,
+            height: 600,
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(187,135,68,0.06) 0%, transparent 65%)",
+            pointerEvents: "none",
+          }}
+        />
+        <div style={{ position: "relative", maxWidth: 700, margin: "0 auto" }}>
           <div
-            className="text-center mb-16 opacity-0 animate-fadeUp"
-            style={{ animationDelay: "0.2s", animationFillMode: "forwards" }}
+            className="reveal"
+            style={{
+              fontSize: "0.75rem",
+              fontWeight: 700,
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "#bb8744",
+              marginBottom: 20,
+            }}
           >
-            <div className="section-divider"></div>
-
-            <div
-              className="inline-flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-semibold mb-4"
+            EMERGENCY SUPPORT
+          </div>
+          <h2
+            className="display reveal"
+            style={{
+              fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
+              fontWeight: 900,
+              color: "#f0d5a0",
+              lineHeight: 1.1,
+              marginBottom: 24,
+            }}
+          >
+            We're One Call Away
+          </h2>
+          <p
+            className="reveal"
+            style={{
+              color: "rgba(240,213,160,0.7)",
+              fontSize: "1.1rem",
+              lineHeight: 1.7,
+              marginBottom: 44,
+            }}
+          >
+            {ADDRESS}
+          </p>
+          <div
+            className="reveal"
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 16,
+              justifyContent: "center",
+            }}
+          >
+            <a
+              href={PHONE_HREF}
+              className="btn-gold"
               style={{
-                background: C.light + "60",
-                color: C.dark,
-                backdropFilter: "blur(10px)",
+                padding: "18px 48px",
+                borderRadius: 16,
+                fontSize: "1.1rem",
               }}
             >
-              <MapPin size={14} />
-              <span>Our Service Areas</span>
+              <Phone size={20} /> {PHONE_DISPLAY}
+            </a>
+            <button
+              onClick={() => goTo("contact")}
+              style={{
+                padding: "18px 40px",
+                borderRadius: 16,
+                fontSize: "1rem",
+                background: "rgba(240,213,160,0.08)",
+                border: "2px solid rgba(240,213,160,0.25)",
+                color: "#f0d5a0",
+                fontWeight: 700,
+                cursor: "pointer",
+                transition: "all 0.25s",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.background = "rgba(240,213,160,0.15)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.background = "rgba(240,213,160,0.08)")
+              }
+            >
+              Send Message
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════ CONTACT ═══════ */}
+      <section
+        id="contact"
+        style={{ padding: "100px 0", background: "#fdf6ec" }}
+      >
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ textAlign: "center", marginBottom: 60 }}>
+            <div
+              className="ornament reveal"
+              style={{
+                color: "#bb8744",
+                fontSize: "0.75rem",
+                fontWeight: 700,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                marginBottom: 16,
+                justifyContent: "center",
+              }}
+            >
+              Get In Touch
             </div>
-
             <h2
-              className="font-display text-4xl md:text-5xl font-bold mb-4"
-              style={{ color: C.dark }}
+              className="display reveal"
+              style={{
+                fontSize: "clamp(2rem, 5vw, 3.5rem)",
+                fontWeight: 900,
+                color: "#5c1d26",
+              }}
             >
-              Serving Across{" "}
-              <span style={{ color: C.accent }}>Greater Noida & NCR</span>
+              We're Here for You
             </h2>
-
-            <p
-              className="text-lg max-w-2xl mx-auto leading-relaxed"
-              style={{ color: C.mid }}
-            >
-              We provide respectful funeral and cremation support services
-              across Greater Noida West, Noida, Ghaziabad, and nearby NCR
-              regions.
-            </p>
           </div>
 
-          {/* Area Cards */}
-          <div className="grid sm:grid-cols-3 gap-7 mb-12">
-            {[
-              {
-                title: "Greater Noida West",
-                areas: [
-                  "Gaur City",
-                  "Noida Extension",
-                  "Crossing Republik",
-                  "Techzone",
-                  "Sector-2",
-                ],
-              },
-              {
-                title: "Greater Noida",
-                areas: [
-                  "Alpha",
-                  "Beta",
-                  "Gamma",
-                  "Pari Chowk",
-                  "Knowledge Park",
-                ],
-              },
-              {
-                title: "Delhi NCR",
-                areas: [
-                  "Noida",
-                  "Ghaziabad",
-                  "Indirapuram",
-                  "Delhi NCR",
-                  "Nearby Regions",
-                ],
-              },
-            ].map((area, idx) => (
-              <div
-                key={idx}
-                className="group relative rounded-3xl p-7 overflow-hidden transition-all duration-700 hover:-translate-y-3 hover:shadow-2xl"
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: 60,
+              alignItems: "start",
+            }}
+          >
+            {/* Left — Info */}
+            <div className="reveal-left">
+              {/* Big phone */}
+              <a
+                href={PHONE_HREF}
                 style={{
-                  background: "rgba(255,255,255,0.75)",
-                  border: `1px solid ${C.light}`,
-                  backdropFilter: "blur(12px)",
-                  animation: `fadeUp 0.8s ease forwards`,
-                  animationDelay: `${idx * 0.2}s`,
-                  opacity: 0,
+                  display: "block",
+                  background: "linear-gradient(135deg, #5c1d26, #3a0d14)",
+                  borderRadius: 24,
+                  padding: "36px 32px",
+                  marginBottom: 24,
+                  textDecoration: "none",
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "scale(1.02)";
+                  e.currentTarget.style.boxShadow =
+                    "0 20px 50px rgba(92,29,38,0.35)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
+                  e.currentTarget.style.boxShadow = "none";
                 }}
               >
-                {/* Glow */}
                 <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-700"
                   style={{
-                    background: `linear-gradient(135deg, ${C.light}10, transparent 70%)`,
-                  }}
-                />
-
-                {/* Badge */}
-                <div
-                  className="relative inline-block px-4 py-2 rounded-full font-bold mb-5 text-sm"
-                  style={{
-                    background: `linear-gradient(135deg, ${C.dark}, #7a2833)`,
-                    color: C.light,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 16,
+                    marginBottom: 8,
                   }}
                 >
-                  {area.title}
-                </div>
-
-                {/* Locations */}
-                <ul className="space-y-3 relative">
-                  {area.areas.map((loc, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center space-x-3 text-sm transition duration-300 group-hover:translate-x-1"
-                      style={{ color: C.mid }}
+                  <div
+                    style={{
+                      width: 52,
+                      height: 52,
+                      borderRadius: 16,
+                      background: "rgba(187,135,68,0.2)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Phone size={24} color="#bb8744" />
+                  </div>
+                  <div>
+                    <div
+                      style={{
+                        fontSize: "0.7rem",
+                        fontWeight: 700,
+                        color: "rgba(240,213,160,0.5)",
+                        letterSpacing: "0.1em",
+                        textTransform: "uppercase",
+                      }}
                     >
-                      <div
-                        className="w-2.5 h-2.5 rounded-full"
-                        style={{ background: C.accent }}
-                      ></div>
+                      Call Pandit Ji Directly
+                    </div>
+                    <div
+                      className="display"
+                      style={{
+                        fontSize: "1.9rem",
+                        fontWeight: 700,
+                        color: "#bb8744",
+                      }}
+                    >
+                      {PHONE_DISPLAY}
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    fontSize: "0.85rem",
+                    color: "rgba(240,213,160,0.5)",
+                    paddingLeft: 68,
+                  }}
+                >
+                  Available 24 hours, 7 days a week
+                </div>
+              </a>
 
-                      <span>{loc}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {/* Info tiles */}
+              {[
+                {
+                  icon: <MapPin size={20} color="#bb8744" />,
+                  label: "Address",
+                  value: ADDRESS,
+                },
+                {
+                  icon: <Clock size={20} color="#bb8744" />,
+                  label: "Hours",
+                  value: "24×7 — Day and Night, Every Day",
+                },
+                {
+                  icon: <Shield size={20} color="#bb8744" />,
+                  label: "Coverage",
+                  value: "Greater Noida, Noida, Ghaziabad, Delhi NCR",
+                },
+              ].map((info, i) => (
+                <div
+                  key={i}
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: 16,
+                    padding: "18px 0",
+                    borderBottom: "1px solid rgba(187,135,68,0.15)",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 40,
+                      height: 40,
+                      borderRadius: 12,
+                      background: "rgba(187,135,68,0.1)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {info.icon}
+                  </div>
+                  <div>
+                    <div
+                      style={{
+                        fontSize: "0.72rem",
+                        fontWeight: 700,
+                        color: "#bb8744",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.1em",
+                        marginBottom: 4,
+                      }}
+                    >
+                      {info.label}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "0.95rem",
+                        color: "#5c1d26",
+                        fontWeight: 600,
+                      }}
+                    >
+                      {info.value}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Right — Form */}
+            <div
+              className="reveal-right"
+              style={{
+                background: "#fffbf5",
+                borderRadius: 24,
+                padding: 40,
+                border: "1px solid rgba(187,135,68,0.2)",
+                boxShadow: "0 8px 40px rgba(92,29,38,0.08)",
+              }}
+            >
+              <h3
+                className="display"
+                style={{
+                  fontSize: "1.8rem",
+                  fontWeight: 700,
+                  color: "#5c1d26",
+                  marginBottom: 28,
+                }}
+              >
+                Send a Message
+              </h3>
+
+              {submitted ? (
+                <div style={{ textAlign: "center", padding: "48px 24px" }}>
+                  <div style={{ fontSize: "3rem", marginBottom: 16 }}>🙏</div>
+                  <p
+                    style={{
+                      color: "#5c1d26",
+                      fontWeight: 700,
+                      fontSize: "1.1rem",
+                    }}
+                  >
+                    Thank you. We'll reach out shortly with compassion and care.
+                  </p>
+                </div>
+              ) : (
+                <form
+                  onSubmit={handleSubmit}
+                  style={{ display: "flex", flexDirection: "column", gap: 20 }}
+                >
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "1fr 1fr",
+                      gap: 16,
+                    }}
+                  >
+                    <div>
+                      <label
+                        style={{
+                          display: "block",
+                          fontSize: "0.78rem",
+                          fontWeight: 700,
+                          color: "#bb8744",
+                          marginBottom: 8,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.08em",
+                        }}
+                      >
+                        Full Name *
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.name}
+                        onChange={(e) =>
+                          setFormData({ ...formData, name: e.target.value })
+                        }
+                        placeholder="Your name"
+                        style={{
+                          padding: "12px 16px",
+                          borderRadius: 12,
+                          fontSize: "0.95rem",
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        style={{
+                          display: "block",
+                          fontSize: "0.78rem",
+                          fontWeight: 700,
+                          color: "#bb8744",
+                          marginBottom: 8,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.08em",
+                        }}
+                      >
+                        Phone *
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        value={formData.phone}
+                        onChange={(e) =>
+                          setFormData({ ...formData, phone: e.target.value })
+                        }
+                        placeholder="+91"
+                        style={{
+                          padding: "12px 16px",
+                          borderRadius: 12,
+                          fontSize: "0.95rem",
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label
+                      style={{
+                        display: "block",
+                        fontSize: "0.78rem",
+                        fontWeight: 700,
+                        color: "#bb8744",
+                        marginBottom: 8,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                      }}
+                    >
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
+                      placeholder="email@example.com"
+                      style={{
+                        padding: "12px 16px",
+                        borderRadius: 12,
+                        fontSize: "0.95rem",
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <label
+                      style={{
+                        display: "block",
+                        fontSize: "0.78rem",
+                        fontWeight: 700,
+                        color: "#bb8744",
+                        marginBottom: 8,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                      }}
+                    >
+                      How can we help?
+                    </label>
+                    <textarea
+                      rows={4}
+                      value={formData.message}
+                      onChange={(e) =>
+                        setFormData({ ...formData, message: e.target.value })
+                      }
+                      placeholder="Tell us what you need..."
+                      style={{
+                        padding: "12px 16px",
+                        borderRadius: 12,
+                        fontSize: "0.95rem",
+                        resize: "vertical",
+                      }}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="btn-gold"
+                    style={{
+                      padding: "16px",
+                      borderRadius: 14,
+                      fontSize: "1rem",
+                      justifyContent: "center",
+                    }}
+                  >
+                    Send Message <ArrowRight size={18} />
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════ SERVICE AREAS + MAP ═══════ */}
+      <section style={{ padding: "100px 0", background: "#f4ebe0" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ textAlign: "center", marginBottom: 56 }}>
+            <h2
+              className="display reveal"
+              style={{
+                fontSize: "clamp(2rem, 4vw, 3rem)",
+                fontWeight: 900,
+                color: "#5c1d26",
+              }}
+            >
+              Areas We <span style={{ color: "#bb8744" }}>Serve</span>
+            </h2>
+          </div>
+          {/* Area pills */}
+          <div
+            className="reveal"
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 12,
+              justifyContent: "center",
+              marginBottom: 48,
+            }}
+          >
+            {[
+              "Greater Noida West",
+              "Gaur City",
+              "Noida Extension",
+              "Crossing Republik",
+              "Techzone",
+              "Greater Noida",
+              "Pari Chowk",
+              "Knowledge Park",
+              "Noida",
+              "Ghaziabad",
+              "Indirapuram",
+              "Delhi NCR",
+            ].map((area) => (
+              <span
+                key={area}
+                style={{
+                  padding: "10px 20px",
+                  borderRadius: 40,
+                  background: "#fffbf5",
+                  border: "1px solid rgba(187,135,68,0.25)",
+                  fontSize: "0.88rem",
+                  fontWeight: 700,
+                  color: "#5c1d26",
+                }}
+              >
+                {area}
+              </span>
             ))}
           </div>
-
           {/* Map */}
           <div
-            className="rounded-[30px] overflow-hidden shadow-2xl group"
+            className="reveal"
             style={{
-              border: `2px solid ${C.light}`,
+              borderRadius: 24,
+              overflow: "hidden",
+              boxShadow: "0 12px 48px rgba(92,29,38,0.12)",
+              border: "2px solid rgba(187,135,68,0.2)",
             }}
           >
             <iframe
               src="https://www.google.com/maps?q=Sector-2+Patwadi+Greater+Noida+West,+Uttar+Pradesh&output=embed"
               width="100%"
-              height="520"
-              style={{ border: 0 }}
+              height="460"
+              style={{ border: 0, display: "block" }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="grayscale group-hover:grayscale-0 transition-all duration-700"
-            ></iframe>
-          </div>
-
-          {/* Bottom CTA */}
-          <div
-            className="mt-12 text-center opacity-0 animate-fadeUp"
-            style={{ animationDelay: "0.8s", animationFillMode: "forwards" }}
-          >
-            <div
-              className="inline-flex flex-col sm:flex-row items-center gap-5 px-8 py-6 rounded-[28px] shadow-2xl"
-              style={{
-                background: `linear-gradient(135deg, ${C.dark}, #7a3018, ${C.mid})`,
-                color: C.light,
-              }}
-            >
-              <div className="flex items-center space-x-4">
-                <div
-                  className="w-14 h-14 rounded-2xl flex items-center justify-center"
-                  style={{
-                    background: C.mid + "25",
-                  }}
-                >
-                  <Phone size={26} style={{ color: C.light }} />
-                </div>
-
-                <div className="text-left">
-                  <p
-                    className="text-xs uppercase tracking-wider"
-                    style={{ color: C.light + "99" }}
-                  >
-                    Emergency Contact
-                  </p>
-
-                  <a
-                    href={PHONE_HREF}
-                    className="text-2xl font-bold hover:opacity-80 transition-opacity"
-                    style={{ color: C.light }}
-                  >
-                    {PHONE_DISPLAY}
-                  </a>
-                </div>
-              </div>
-
-              <div
-                className="hidden sm:block w-px h-12"
-                style={{ background: C.light + "30" }}
-              ></div>
-
-              <p
-                className="font-semibold text-center sm:text-left"
-                style={{ color: C.light }}
-              >
-                Available 24×7 for Immediate Funeral Assistance
-              </p>
-            </div>
+            />
           </div>
         </div>
       </section>
 
-      {/* ── FAQ ── */}
-      <section
-        className="py-16 lg:py-24 relative overflow-hidden"
-        style={{ background: C.bg }}
-      >
-        {/* Background Glow */}
-        <div
-          className="absolute top-0 left-0 w-96 h-96 rounded-full blur-3xl opacity-10 animate-pulse"
-          style={{ background: C.light }}
-        />
-
-        <div
-          className="absolute bottom-0 right-0 w-80 h-80 rounded-full blur-3xl opacity-10 animate-pulse"
-          style={{
-            background: C.accent,
-            animationDelay: "1s",
-          }}
-        />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Heading */}
-          <div
-            className="text-center mb-16 opacity-0 animate-fadeUp"
-            style={{
-              animationDelay: "0.2s",
-              animationFillMode: "forwards",
-            }}
-          >
-            <div className="section-divider"></div>
-
+      {/* ═══════ FAQ ═══════ */}
+      <section style={{ padding: "100px 0", background: "#fdf6ec" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ textAlign: "center", marginBottom: 56 }}>
             <div
-              className="inline-flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-semibold mb-5"
+              className="ornament reveal"
               style={{
-                background: C.light + "60",
-                color: C.dark,
-                backdropFilter: "blur(10px)",
+                color: "#bb8744",
+                fontSize: "0.75rem",
+                fontWeight: 700,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                marginBottom: 16,
+                justifyContent: "center",
               }}
             >
-              <span>❓</span>
-              <span>Frequently Asked Questions</span>
+              FAQ
             </div>
-
             <h2
-              className="font-display text-4xl md:text-5xl font-bold mb-4"
-              style={{ color: C.dark }}
+              className="display reveal"
+              style={{
+                fontSize: "clamp(2rem, 4vw, 3rem)",
+                fontWeight: 900,
+                color: "#5c1d26",
+              }}
             >
-              Common{" "}
-              <span style={{ color: C.accent }}>Questions & Support</span>
+              Common <span style={{ color: "#bb8744" }}>Questions</span>
             </h2>
-
-            <p
-              className="text-lg max-w-2xl mx-auto leading-relaxed"
-              style={{ color: C.mid }}
-            >
-              Find answers to the most commonly asked questions regarding our
-              funeral and cremation services.
-            </p>
           </div>
 
-          {/* FAQ Grid */}
-          <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-            {[
-              {
-                q: "Are your funeral services available 24×7?",
-                a: "Yes, our team remains available day and night to provide immediate assistance during emergencies and difficult situations.",
-              },
-              {
-                q: "Do you provide cremation arrangements?",
-                a: "Yes, we manage complete cremation arrangements including transportation, rituals, bookings, and ceremony assistance.",
-              },
-              {
-                q: "Can you help with documentation and certificates?",
-                a: "We assist families with important paperwork including certificates, permissions, and required formalities.",
-              },
-              {
-                q: "Do you provide freezer box services?",
-                a: "Yes, we provide clean and properly maintained freezer box arrangements for homes and hospitals.",
-              },
-              {
-                q: "Which areas do you serve?",
-                a: "We provide services across Greater Noida, Noida Extension, Ghaziabad, Delhi NCR, and nearby surrounding regions.",
-              },
-              {
-                q: "How quickly can your team respond?",
-                a: "Our emergency response team works quickly and efficiently to provide immediate support and arrangements.",
-              },
-            ].map((faq, idx) => (
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {faqs.map((faq, i) => (
               <div
-                key={idx}
-                className="group relative overflow-hidden rounded-[28px] transition-all duration-700 hover:-translate-y-2 hover:shadow-2xl"
+                key={i}
+                className="reveal"
                 style={{
-                  background: "rgba(255,255,255,0.75)",
-                  border: `1px solid ${C.light}`,
-                  backdropFilter: "blur(12px)",
-                  animation: `fadeUp 0.8s ease forwards`,
-                  animationDelay: `${idx * 0.15}s`,
-                  opacity: 0,
+                  background: "#fffbf5",
+                  border: `1px solid ${openFaq === i ? "rgba(187,135,68,0.5)" : "rgba(187,135,68,0.15)"}`,
+                  borderRadius: 18,
+                  overflow: "hidden",
+                  transition: "border-color 0.3s",
                 }}
               >
-                {/* Hover Glow */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-700"
-                  style={{
-                    background: `linear-gradient(135deg, ${C.light}10, transparent 70%)`,
-                  }}
-                />
-
-                {/* Question */}
                 <button
-                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                  className="relative w-full px-6 py-5 flex items-start justify-between text-left"
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  style={{
+                    width: "100%",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "22px 28px",
+                    textAlign: "left",
+                    gap: 16,
+                  }}
                 >
-                  <h3
-                    className="font-bold text-base sm:text-lg pr-4 transition duration-300 group-hover:translate-x-1"
-                    style={{ color: C.dark }}
-                  >
-                    {faq.q}
-                  </h3>
-
-                  <div
-                    className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-500 ${
-                      openFaq === idx ? "rotate-180 scale-110" : ""
-                    }`}
+                  <span
                     style={{
-                      background: C.light + "50",
-                      color: C.dark,
+                      fontWeight: 700,
+                      fontSize: "1rem",
+                      color: "#5c1d26",
                     }}
                   >
-                    <ChevronDown size={20} />
-                  </div>
-                </button>
-
-                {/* Answer */}
-                <div
-                  className={`grid transition-all duration-500 ${
-                    openFaq === idx
-                      ? "grid-rows-[1fr] opacity-100"
-                      : "grid-rows-[0fr] opacity-0"
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <div
-                      className="px-6 pb-6 border-t"
+                    {faq.q}
+                  </span>
+                  <div
+                    style={{
+                      width: 32,
+                      height: 32,
+                      borderRadius: 10,
+                      background:
+                        openFaq === i ? "#5c1d26" : "rgba(187,135,68,0.1)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                      transition: "all 0.3s",
+                      transform: openFaq === i ? "rotate(45deg)" : "rotate(0)",
+                    }}
+                  >
+                    <span
                       style={{
-                        borderColor: `${C.light}`,
+                        fontSize: "1.2rem",
+                        color: openFaq === i ? "#bb8744" : "#5c1d26",
+                        lineHeight: 1,
                       }}
                     >
-                      <p
-                        className="text-sm sm:text-base leading-relaxed pt-5"
-                        style={{ color: C.mid }}
-                      >
-                        {faq.a}
-                      </p>
-                    </div>
+                      +
+                    </span>
+                  </div>
+                </button>
+                <div className={`faq-body ${openFaq === i ? "open" : ""}`}>
+                  <div
+                    style={{
+                      padding: "0 28px 24px",
+                      color: "#7a4a30",
+                      lineHeight: 1.7,
+                      fontSize: "0.95rem",
+                    }}
+                  >
+                    {faq.a}
                   </div>
                 </div>
               </div>
             ))}
           </div>
-
-          {/* Bottom CTA */}
-          <div
-            className="mt-16 opacity-0 animate-fadeUp"
-            style={{
-              animationDelay: "1s",
-              animationFillMode: "forwards",
-            }}
-          >
-            <div
-              className="relative overflow-hidden rounded-[32px] p-8 sm:p-10 text-center max-w-4xl mx-auto shadow-2xl"
-              style={{
-                background: `linear-gradient(135deg, ${C.dark}, #7a3018, ${C.mid})`,
-              }}
-            >
-              {/* Glow */}
-              <div
-                className="absolute inset-0 opacity-20"
-                style={{
-                  background: `radial-gradient(circle at top, ${C.light}30, transparent 70%)`,
-                }}
-              />
-
-              <div className="relative">
-                <h3
-                  className="font-display text-3xl sm:text-4xl font-bold mb-4"
-                  style={{ color: C.light }}
-                >
-                  Need Immediate Assistance?
-                </h3>
-
-                <p
-                  className="text-base sm:text-lg mb-7 max-w-2xl mx-auto leading-relaxed"
-                  style={{ color: C.light + "CC" }}
-                >
-                  Our compassionate support team is available 24×7 to guide and
-                  assist families with funeral arrangements and emergency
-                  services.
-                </p>
-
-                <div className="flex flex-wrap gap-4 justify-center">
-                  <a
-                    href={PHONE_HREF}
-                    className="sp-btn px-8 py-4 rounded-2xl font-bold shadow-2xl transition-all duration-500 hover:scale-105 hover:-translate-y-1"
-                  >
-                    Call Now
-                  </a>
-
-                  <button
-                    onClick={() => scrollToSection("contact")}
-                    className="px-8 py-4 rounded-2xl font-bold transition-all duration-500 hover:scale-105 hover:-translate-y-1"
-                    style={{
-                      background: "rgba(255,255,255,0.12)",
-                      border: `1px solid ${C.light}40`,
-                      color: C.light,
-                      backdropFilter: "blur(10px)",
-                    }}
-                  >
-                    Contact Us
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
+      {/* ═══════ FOOTER ═══════ */}
       <footer
-        className="relative overflow-hidden"
         style={{
-          background: `linear-gradient(135deg, ${C.dark} 0%, #2a0d12 50%, #120608 100%)`,
+          background:
+            "linear-gradient(160deg, #1a0508 0%, #2a0d12 50%, #3a0d14 100%)",
+          padding: "72px 24px 32px",
+          position: "relative",
+          overflow: "hidden",
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
-          {/* Top Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage:
+              "radial-gradient(rgba(187,135,68,0.04) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
+        <div
+          style={{
+            maxWidth: 1280,
+            margin: "0 auto",
+            position: "relative",
+            zIndex: 2,
+          }}
+        >
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "2fr 1fr 1fr 1fr",
+              gap: 48,
+              marginBottom: 56,
+            }}
+          >
             {/* Brand */}
-            <div className="lg:col-span-2">
-              {/* Logo */}
-              <div className="flex items-center space-x-4 mb-6">
+            <div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 14,
+                  marginBottom: 24,
+                }}
+              >
                 <div
-                  className="w-20 h-20 rounded-2xl overflow-hidden shadow-2xl border"
                   style={{
-                    borderColor: `${C.light}40`,
-                    background: "rgba(255,255,255,0.06)",
-                    backdropFilter: "blur(12px)",
+                    width: 52,
+                    height: 52,
+                    borderRadius: 16,
+                    background: "rgba(187,135,68,0.15)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 24,
                   }}
                 >
-                  <img
-                    src="/logo.png"
-                    alt="Logo"
-                    className="w-full h-full object-cover"
-                  />
+                  🕉️
                 </div>
-
                 <div>
-                  <h3
-                    className="font-display text-2xl font-bold"
-                    style={{ color: C.light }}
+                  <div
+                    className="display"
+                    style={{
+                      fontSize: "1.2rem",
+                      fontWeight: 700,
+                      color: "#f0d5a0",
+                    }}
                   >
-                    {NAME_EN}
-                  </h3>
-
-                  <p className="text-sm mt-1" style={{ color: C.mid + "90" }}>
+                    {NAME_FULL}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "0.75rem",
+                      color: "#bb8744",
+                      fontWeight: 600,
+                    }}
+                  >
                     {NAME_HI}
-                  </p>
+                  </div>
                 </div>
               </div>
-
-              {/* About */}
               <p
-                className="text-sm leading-relaxed mb-5 max-w-2xl"
-                style={{ color: C.mid + "BB" }}
-              >
-                We provide respectful funeral and cremation services with
-                complete arrangements, compassionate support, and dignified
-                assistance for families during difficult times.
-              </p>
-
-              {/* Hindi Quote */}
-              <div
-                className="inline-block px-5 py-4 rounded-2xl"
                 style={{
-                  background: "rgba(255,255,255,0.05)",
-                  border: `1px solid ${C.mid}25`,
-                  backdropFilter: "blur(10px)",
+                  color: "rgba(240,213,160,0.5)",
+                  fontSize: "0.9rem",
+                  lineHeight: 1.7,
+                  maxWidth: 320,
+                  marginBottom: 24,
+                }}
+              >
+                Providing respectful, dignified funeral and cremation services
+                for all communities across Greater Noida and the NCR region
+                since 2014.
+              </p>
+              <div
+                style={{
+                  padding: "16px 20px",
+                  background: "rgba(187,135,68,0.08)",
+                  border: "1px solid rgba(187,135,68,0.2)",
+                  borderRadius: 14,
                 }}
               >
                 <p
-                  className="text-sm sm:text-base font-medium italic"
-                  style={{ color: C.light + "DD" }}
+                  style={{
+                    fontSize: "0.88rem",
+                    color: "rgba(240,213,160,0.7)",
+                    fontStyle: "italic",
+                  }}
                 >
                   "कृपया अपने प्रियजन की भस्म एवं राख साथ ले जाने की कृपा करें।"
-                </p>
-
-                <p className="text-xs mt-2" style={{ color: C.mid + "70" }}>
-                  (Please collect the ashes after the ceremony.)
                 </p>
               </div>
             </div>
 
-            {/* Quick Links */}
+            {/* Links */}
             <div>
-              <h4 className="font-bold text-lg mb-5" style={{ color: C.light }}>
-                Quick Links
-              </h4>
+              <div
+                style={{
+                  fontSize: "0.72rem",
+                  fontWeight: 700,
+                  color: "#bb8744",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  marginBottom: 20,
+                }}
+              >
+                Navigate
+              </div>
+              {["Home", "About", "Services", "Contact"].map((n) => (
+                <button
+                  key={n}
+                  onClick={() => goTo(n.toLowerCase())}
+                  style={{
+                    display: "block",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    textAlign: "left",
+                    padding: "8px 0",
+                    fontSize: "0.92rem",
+                    color: "rgba(240,213,160,0.55)",
+                    fontWeight: 600,
+                    transition: "color 0.2s",
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.color = "#bb8744")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = "rgba(240,213,160,0.55)")
+                  }
+                >
+                  {n}
+                </button>
+              ))}
+            </div>
 
-              <ul className="space-y-3">
-                {["Home", "About", "Services", "Contact"].map((item, idx) => (
-                  <li key={idx}>
-                    <button
-                      onClick={() => scrollToSection(item.toLowerCase())}
-                      className="group flex items-center space-x-2 text-sm transition-all duration-300 hover:translate-x-1"
-                      style={{ color: C.mid + "BB" }}
-                    >
-                      <span
-                        className="w-2 h-2 rounded-full transition-all duration-300 group-hover:w-4"
-                        style={{ background: C.accent }}
-                      ></span>
-
-                      <span>{item}</span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
+            {/* Services */}
+            <div>
+              <div
+                style={{
+                  fontSize: "0.72rem",
+                  fontWeight: 700,
+                  color: "#bb8744",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  marginBottom: 20,
+                }}
+              >
+                Services
+              </div>
+              {[
+                "Freezer Box",
+                "Transportation",
+                "Cremation Rites",
+                "Documentation",
+                "Ritual Packages",
+                "24×7 Emergency",
+              ].map((s) => (
+                <div
+                  key={s}
+                  style={{
+                    padding: "8px 0",
+                    fontSize: "0.88rem",
+                    color: "rgba(240,213,160,0.5)",
+                    fontWeight: 600,
+                  }}
+                >
+                  {s}
+                </div>
+              ))}
             </div>
 
             {/* Contact */}
             <div>
-              <h4 className="font-bold text-lg mb-5" style={{ color: C.light }}>
-                Contact Details
-              </h4>
-
-              <ul className="space-y-5">
-                {/* Phone */}
-                <li className="flex items-start space-x-4">
-                  <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{
-                      background: C.mid + "20",
-                      color: C.light,
-                    }}
-                  >
-                    <Phone size={18} />
-                  </div>
-
-                  <div>
-                    <a
-                      href={PHONE_HREF}
-                      className="font-semibold hover:opacity-80 transition-opacity"
-                      style={{ color: C.light }}
-                    >
-                      {PHONE_DISPLAY}
-                    </a>
-
-                    <p className="text-xs mt-1" style={{ color: C.mid + "70" }}>
-                      24×7 Emergency Support
-                    </p>
-                  </div>
-                </li>
-
-                {/* Address */}
-                <li className="flex items-start space-x-4">
-                  <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{
-                      background: C.mid + "20",
-                      color: C.light,
-                    }}
-                  >
-                    <MapPin size={18} />
-                  </div>
-
-                  <div>
-                    <p
-                      className="text-sm leading-relaxed"
-                      style={{ color: C.light + "CC" }}
-                    >
-                      {ADDRESS}
-                    </p>
-                  </div>
-                </li>
-
-                {/* Timing */}
-                <li className="flex items-start space-x-4">
-                  <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{
-                      background: C.mid + "20",
-                      color: C.light,
-                    }}
-                  >
-                    <Clock size={18} />
-                  </div>
-
-                  <div>
-                    <p className="text-sm" style={{ color: C.light + "CC" }}>
-                      Available 24×7 — Day & Night Assistance
-                    </p>
-                  </div>
-                </li>
-              </ul>
+              <div
+                style={{
+                  fontSize: "0.72rem",
+                  fontWeight: 700,
+                  color: "#bb8744",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  marginBottom: 20,
+                }}
+              >
+                Contact
+              </div>
+              <a
+                href={PHONE_HREF}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 4,
+                  marginBottom: 20,
+                  textDecoration: "none",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "0.72rem",
+                    color: "rgba(240,213,160,0.4)",
+                    fontWeight: 600,
+                  }}
+                >
+                  24×7 HELPLINE
+                </span>
+                <span
+                  className="display"
+                  style={{
+                    fontSize: "1.4rem",
+                    fontWeight: 700,
+                    color: "#bb8744",
+                  }}
+                >
+                  {PHONE_DISPLAY}
+                </span>
+              </a>
+              <div
+                style={{
+                  fontSize: "0.85rem",
+                  color: "rgba(240,213,160,0.5)",
+                  lineHeight: 1.6,
+                }}
+              >
+                {ADDRESS}
+              </div>
             </div>
           </div>
 
-          {/* Bottom */}
           <div
-            className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
             style={{
-              borderTop: `1px solid ${C.mid}25`,
+              borderTop: "1px solid rgba(187,135,68,0.15)",
+              paddingTop: 28,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: 12,
             }}
           >
-            <p
-              className="text-xs sm:text-sm text-center sm:text-left"
-              style={{ color: C.mid + "70" }}
-            >
-              © 2026 {NAME_EN}. All Rights Reserved.
-            </p>
-
             <div
-              className="flex items-center space-x-2 text-xs sm:text-sm"
-              style={{ color: C.mid + "70" }}
+              style={{ fontSize: "0.82rem", color: "rgba(240,213,160,0.35)" }}
             >
-              <span>Designed with Care & Respect</span>
-
-              <span style={{ color: C.accent }}>●</span>
-
-              <span>24×7 Funeral Assistance</span>
+              © 2026 {NAME_FULL}. All Rights Reserved.
+            </div>
+            <div
+              style={{ fontSize: "0.82rem", color: "rgba(240,213,160,0.35)" }}
+            >
+              Designed with Care & Respect ✦ 24×7 Funeral Assistance
             </div>
           </div>
         </div>
       </footer>
+
+      {/* Sticky call bar — mobile */}
+      <div
+        style={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 200,
+          display: "none",
+        }}
+        className="sticky-call"
+      >
+        <a
+          href={PHONE_HREF}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 12,
+            background: "linear-gradient(90deg, #5c1d26, #7a2833)",
+            color: "#f0d5a0",
+            fontWeight: 800,
+            fontSize: "1rem",
+            padding: "16px",
+            textDecoration: "none",
+          }}
+        >
+          <Phone size={20} /> Call Now: {PHONE_DISPLAY}
+        </a>
+      </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .hidden-mobile { display: none !important; }
+          .show-mobile { display: flex !important; }
+          .sticky-call { display: block !important; }
+          section > div > div[style*="grid-template-columns: 1fr 1fr"],
+          section > div > div[style*="grid-template-columns: 1fr 2fr"],
+          section > div > div[style*="grid-template-columns: 2fr 1fr 1fr 1fr"] {
+            grid-template-columns: 1fr !important;
+          }
+        }
+        .show-mobile { display: none; }
+      `}</style>
     </div>
   );
+}
+
+/* Intersection Observer for reveal animations */
+function RevealObserver() {
+  useEffect(() => {
+    const els = document.querySelectorAll(
+      ".reveal, .reveal-left, .reveal-right",
+    );
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.12 },
+    );
+    els.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+  return null;
 }
