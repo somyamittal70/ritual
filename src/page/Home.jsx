@@ -334,13 +334,17 @@ export default function OmAntimNiwasSite() {
           paddingTop: 72,
         }}
       >
-        {/* Background */}
+        {/* Background Image */}
         <div
           style={{
             position: "absolute",
             inset: 0,
-            background:
-              "linear-gradient(135deg, #f5e2bb 0%, #f0d5a0 45%, #e8c68a 100%)",
+            backgroundImage: `
+        url("/banner.png")
+      `,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
           }}
         />
 
@@ -354,7 +358,7 @@ export default function OmAntimNiwasSite() {
             height: 500,
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(92,29,38,0.12) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%)",
           }}
         />
 
@@ -367,44 +371,9 @@ export default function OmAntimNiwasSite() {
             height: 400,
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(187,135,68,0.12) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(245,208,138,0.12) 0%, transparent 70%)",
           }}
         />
-
-        {/* Decorative vertical lines */}
-        {[20, 40, 60, 80].map((p) => (
-          <div
-            key={p}
-            style={{
-              position: "absolute",
-              top: 0,
-              bottom: 0,
-              left: `${p}%`,
-              width: 1,
-              background: "rgba(92,29,38,0.05)",
-            }}
-          />
-        ))}
-
-        {/* Big ornamental Om */}
-        <div
-          className="float"
-          style={{
-            position: "absolute",
-            right: "8%",
-            top: "50%",
-            transform: "translateY(-50%)",
-            fontSize: "clamp(160px, 20vw, 280px)",
-            opacity: 0.08,
-            color: "#5c1d26",
-            fontFamily: "serif",
-            pointerEvents: "none",
-            lineHeight: 1,
-            textShadow: "0 0 40px rgba(92,29,38,0.08)",
-          }}
-        >
-          ॐ
-        </div>
 
         <div
           style={{
@@ -423,8 +392,8 @@ export default function OmAntimNiwasSite() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 10,
-                background: "rgba(92,29,38,0.08)",
-                border: "1px solid rgba(92,29,38,0.15)",
+                background: "rgba(255,255,255,0.12)",
+                border: "1px solid rgba(255,255,255,0.18)",
                 borderRadius: 40,
                 padding: "8px 20px",
                 marginBottom: 32,
@@ -436,17 +405,17 @@ export default function OmAntimNiwasSite() {
                   width: 8,
                   height: 8,
                   borderRadius: "50%",
-                  background: "#8b2f3b",
+                  background: "#f5d08a",
                   animation: "pulse-ring 2s ease-out infinite",
                   position: "relative",
-                  boxShadow: "0 0 12px rgba(139,47,59,0.5)",
+                  boxShadow: "0 0 12px rgba(245,208,138,0.6)",
                 }}
                 className="pulse-ring"
               />
 
               <span
                 style={{
-                  color: "#5c1d26",
+                  color: "#ffffff",
                   fontSize: "0.8rem",
                   fontWeight: 700,
                   letterSpacing: "0.12em",
@@ -463,10 +432,10 @@ export default function OmAntimNiwasSite() {
               style={{
                 fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
                 fontWeight: 900,
-                color: "#4a1720",
+                color: "#ffffff",
                 lineHeight: 1.05,
                 marginBottom: 12,
-                textShadow: "0 2px 12px rgba(92,29,38,0.08)",
+                textShadow: "0 4px 20px rgba(0,0,0,0.5)",
               }}
             >
               Dignified
@@ -479,11 +448,12 @@ export default function OmAntimNiwasSite() {
                 fontWeight: 900,
                 lineHeight: 1.05,
                 background:
-                  "linear-gradient(90deg, #5c1d26 0%, #8b2f3b 35%, #bb8744 50%, #8b2f3b 65%, #5c1d26 100%)",
+                  "linear-gradient(90deg, #ffffff 0%, #f5d08a 50%, #ffffff 100%)",
                 backgroundSize: "200% auto",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 marginBottom: 12,
+                textShadow: "0 4px 20px rgba(0,0,0,0.4)",
               }}
             >
               Last Rites
@@ -494,10 +464,11 @@ export default function OmAntimNiwasSite() {
               style={{
                 fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
                 fontWeight: 900,
-                color: "rgba(92,29,38,0.45)",
+                color: "rgba(255,255,255,0.75)",
                 lineHeight: 1.05,
                 marginBottom: 32,
                 fontStyle: "italic",
+                textShadow: "0 4px 20px rgba(0,0,0,0.4)",
               }}
             >
               Services
@@ -507,8 +478,8 @@ export default function OmAntimNiwasSite() {
             <div
               style={{
                 display: "inline-block",
-                background: "rgba(92,29,38,0.08)",
-                border: "1px solid rgba(92,29,38,0.15)",
+                background: "rgba(255,255,255,0.12)",
+                border: "1px solid rgba(255,255,255,0.18)",
                 borderRadius: 12,
                 padding: "10px 18px",
                 marginBottom: 28,
@@ -517,7 +488,7 @@ export default function OmAntimNiwasSite() {
             >
               <span
                 style={{
-                  color: "#5c1d26",
+                  color: "#ffffff",
                   fontSize: "1.05rem",
                   fontWeight: 700,
                 }}
@@ -529,11 +500,12 @@ export default function OmAntimNiwasSite() {
             {/* Description */}
             <p
               style={{
-                color: "rgba(92,29,38,0.82)",
+                color: "rgba(255,255,255,0.92)",
                 fontSize: "1.05rem",
                 lineHeight: 1.85,
                 maxWidth: 520,
                 marginBottom: 44,
+                textShadow: "0 2px 10px rgba(0,0,0,0.35)",
               }}
             >
               We stand beside your family in the most difficult moments —
@@ -557,12 +529,12 @@ export default function OmAntimNiwasSite() {
                   padding: "16px 36px",
                   borderRadius: 14,
                   fontSize: "1rem",
-                  background: "#5c1d26",
-                  color: "#fff",
+                  background: "#f5d08a",
+                  color: "#2b0f14",
                   border: "none",
                   fontWeight: 700,
                   cursor: "pointer",
-                  boxShadow: "0 10px 30px rgba(92,29,38,0.18)",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
                 }}
               >
                 Request Service <ArrowRight size={18} />
@@ -574,24 +546,24 @@ export default function OmAntimNiwasSite() {
                   padding: "16px 36px",
                   borderRadius: 14,
                   fontSize: "1rem",
-                  border: "2px solid rgba(92,29,38,0.2)",
-                  color: "#5c1d26",
+                  border: "2px solid rgba(255,255,255,0.2)",
+                  color: "#ffffff",
                   fontWeight: 700,
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 8,
                   textDecoration: "none",
                   transition: "all 0.3s ease",
-                  background: "rgba(255,255,255,0.35)",
+                  background: "rgba(255,255,255,0.12)",
                   backdropFilter: "blur(10px)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(92,29,38,0.08)";
-                  e.currentTarget.style.borderColor = "#5c1d26";
+                  e.currentTarget.style.background = "rgba(255,255,255,0.18)";
+                  e.currentTarget.style.borderColor = "#ffffff";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(255,255,255,0.35)";
-                  e.currentTarget.style.borderColor = "rgba(92,29,38,0.2)";
+                  e.currentTarget.style.background = "rgba(255,255,255,0.12)";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)";
                 }}
               >
                 <Phone size={18} /> {PHONE_DISPLAY}
@@ -612,8 +584,9 @@ export default function OmAntimNiwasSite() {
                     style={{
                       fontSize: "1.8rem",
                       fontWeight: 800,
-                      color: "#8b2f3b",
+                      color: "#f5d08a",
                       marginBottom: 4,
+                      textShadow: "0 4px 15px rgba(0,0,0,0.4)",
                     }}
                   >
                     {n}
@@ -622,7 +595,7 @@ export default function OmAntimNiwasSite() {
                   <div
                     style={{
                       fontSize: "0.78rem",
-                      color: "rgba(92,29,38,0.75)",
+                      color: "rgba(255,255,255,0.82)",
                       textTransform: "uppercase",
                       letterSpacing: "0.08em",
                       fontWeight: 700,
@@ -635,20 +608,6 @@ export default function OmAntimNiwasSite() {
             </div>
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 32,
-            left: "50%",
-            transform: "translateX(-50%)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 8,
-          }}
-        ></div>
       </section>
 
       {/* ═══════ MARQUEE STRIP ═══════ */}
