@@ -13,6 +13,14 @@ import {
   CheckCircle,
   ChevronRight,
   ArrowRight,
+  Zap,
+  HeartHandshake,
+  ClipboardList,
+  Scale,
+  FileText,
+  ShieldCheck,
+  Briefcase,
+  Landmark,
 } from "lucide-react";
 
 const PHONE_DISPLAY = "+91 9971466271";
@@ -55,40 +63,40 @@ export default function OmAntimNiwasSite() {
 
   const services = [
     {
-      icon: "❄️",
-      title: "Freezer Box",
-      subtitle: "Home & Hospital",
-      desc: "Properly cooled, hygienic freezer boxes available on immediate call, delivered anywhere in NCR.",
+      icon: <Scale size={42} strokeWidth={1.8} color="#5c1d26" />,
+      subtitle: "Legal Guidance",
+      title: "Family Law Support",
+      desc: "Professional legal consultation and complete assistance for family-related matters.",
     },
     {
-      icon: "🚐",
-      title: "Funeral Transport",
-      subtitle: "Respectful Vehicles",
-      desc: "Clean, dignified ambulance and hearse services with trained, compassionate staff.",
+      icon: <FileText size={42} strokeWidth={1.8} color="#5c1d26" />,
+      subtitle: "Documentation",
+      title: "Document Preparation",
+      desc: "Accurate drafting and management of important legal and personal documents.",
     },
     {
-      icon: "🕉️",
-      title: "Cremation Rites",
-      subtitle: "All Traditions",
-      desc: "Complete cremation support — rituals, bookings, Pandit Ji, and full ceremony management.",
+      icon: <Users size={42} strokeWidth={1.8} color="#5c1d26" />,
+      subtitle: "Consultation",
+      title: "Expert Advisors",
+      desc: "Connect with experienced professionals for trusted advice and planning.",
     },
     {
-      icon: "📄",
-      title: "Documentation",
-      subtitle: "Legal Paperwork",
-      desc: "Death certificates, cremation permits, and all required formalities handled end-to-end.",
+      icon: <ShieldCheck size={42} strokeWidth={1.8} color="#5c1d26" />,
+      subtitle: "Protection",
+      title: "Secure Assistance",
+      desc: "Reliable and confidential handling of all your sensitive information.",
     },
     {
-      icon: "🪔",
-      title: "Ritual Packages",
-      subtitle: "Custom Ceremonies",
-      desc: "Tailored last rites packages honouring your family's customs, traditions, and beliefs.",
+      icon: <Briefcase size={42} strokeWidth={1.8} color="#5c1d26" />,
+      subtitle: "Professional Services",
+      title: "Business Support",
+      desc: "Complete legal and documentation support tailored for businesses.",
     },
     {
-      icon: "🚨",
-      title: "24×7 Emergency",
-      subtitle: "Instant Response",
-      desc: "Our team mobilises within minutes — day or night — to bring calm in your hardest hour.",
+      icon: <Landmark size={42} strokeWidth={1.8} color="#5c1d26" />,
+      subtitle: "Government Work",
+      title: "Official Procedures",
+      desc: "Smooth assistance for registrations, approvals, and official processes.",
     },
   ];
 
@@ -331,7 +339,8 @@ export default function OmAntimNiwasSite() {
           style={{
             position: "absolute",
             inset: 0,
-            background: " #5c1d26",
+            background:
+              "linear-gradient(135deg, #f5e2bb 0%, #f0d5a0 45%, #e8c68a 100%)",
           }}
         />
 
@@ -345,9 +354,10 @@ export default function OmAntimNiwasSite() {
             height: 500,
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(187,135,68,0.15) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(92,29,38,0.12) 0%, transparent 70%)",
           }}
         />
+
         <div
           style={{
             position: "absolute",
@@ -357,7 +367,7 @@ export default function OmAntimNiwasSite() {
             height: 400,
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(187,135,68,0.08) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(187,135,68,0.12) 0%, transparent 70%)",
           }}
         />
 
@@ -371,7 +381,7 @@ export default function OmAntimNiwasSite() {
               bottom: 0,
               left: `${p}%`,
               width: 1,
-              background: "rgba(187,135,68,0.06)",
+              background: "rgba(92,29,38,0.05)",
             }}
           />
         ))}
@@ -385,11 +395,12 @@ export default function OmAntimNiwasSite() {
             top: "50%",
             transform: "translateY(-50%)",
             fontSize: "clamp(160px, 20vw, 280px)",
-            opacity: 0.06,
-            color: "#bb8744",
+            opacity: 0.08,
+            color: "#5c1d26",
             fontFamily: "serif",
             pointerEvents: "none",
             lineHeight: 1,
+            textShadow: "0 0 40px rgba(92,29,38,0.08)",
           }}
         >
           ॐ
@@ -412,11 +423,12 @@ export default function OmAntimNiwasSite() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 10,
-                background: "rgba(187,135,68,0.15)",
-                border: "1px solid rgba(187,135,68,0.3)",
+                background: "rgba(92,29,38,0.08)",
+                border: "1px solid rgba(92,29,38,0.15)",
                 borderRadius: 40,
                 padding: "8px 20px",
                 marginBottom: 32,
+                backdropFilter: "blur(8px)",
               }}
             >
               <div
@@ -424,15 +436,17 @@ export default function OmAntimNiwasSite() {
                   width: 8,
                   height: 8,
                   borderRadius: "50%",
-                  background: "#bb8744",
+                  background: "#8b2f3b",
                   animation: "pulse-ring 2s ease-out infinite",
                   position: "relative",
+                  boxShadow: "0 0 12px rgba(139,47,59,0.5)",
                 }}
                 className="pulse-ring"
               />
+
               <span
                 style={{
-                  color: "#d4a055",
+                  color: "#5c1d26",
                   fontSize: "0.8rem",
                   fontWeight: 700,
                   letterSpacing: "0.12em",
@@ -449,30 +463,38 @@ export default function OmAntimNiwasSite() {
               style={{
                 fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
                 fontWeight: 900,
-                color: "#fffbf5",
+                color: "#4a1720",
                 lineHeight: 1.05,
                 marginBottom: 12,
+                textShadow: "0 2px 12px rgba(92,29,38,0.08)",
               }}
             >
               Dignified
             </h1>
+
             <h1
               className="display gold-shimmer"
               style={{
                 fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
                 fontWeight: 900,
                 lineHeight: 1.05,
+                background:
+                  "linear-gradient(90deg, #5c1d26 0%, #8b2f3b 35%, #bb8744 50%, #8b2f3b 65%, #5c1d26 100%)",
+                backgroundSize: "200% auto",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
                 marginBottom: 12,
               }}
             >
               Last Rites
             </h1>
+
             <h1
               className="display"
               style={{
                 fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
                 fontWeight: 900,
-                color: "rgba(255,251,245,0.5)",
+                color: "rgba(92,29,38,0.45)",
                 lineHeight: 1.05,
                 marginBottom: 32,
                 fontStyle: "italic",
@@ -485,29 +507,31 @@ export default function OmAntimNiwasSite() {
             <div
               style={{
                 display: "inline-block",
-                background: "rgba(187,135,68,0.12)",
-                border: "1px solid rgba(187,135,68,0.25)",
-                borderRadius: 10,
+                background: "rgba(92,29,38,0.08)",
+                border: "1px solid rgba(92,29,38,0.15)",
+                borderRadius: 12,
                 padding: "10px 18px",
                 marginBottom: 28,
+                backdropFilter: "blur(8px)",
               }}
             >
               <span
                 style={{
-                  color: "#f0d5a0",
+                  color: "#5c1d26",
                   fontSize: "1.05rem",
-                  fontWeight: 600,
+                  fontWeight: 700,
                 }}
               >
                 {NAME_HI}
               </span>
             </div>
 
+            {/* Description */}
             <p
               style={{
-                color: "rgba(240,213,160,0.75)",
+                color: "rgba(92,29,38,0.82)",
                 fontSize: "1.05rem",
-                lineHeight: 1.75,
+                lineHeight: 1.85,
                 maxWidth: 520,
                 marginBottom: 44,
               }}
@@ -517,6 +541,7 @@ export default function OmAntimNiwasSite() {
               complete care and compassion.
             </p>
 
+            {/* Buttons */}
             <div
               style={{
                 display: "flex",
@@ -532,61 +557,72 @@ export default function OmAntimNiwasSite() {
                   padding: "16px 36px",
                   borderRadius: 14,
                   fontSize: "1rem",
+                  background: "#5c1d26",
+                  color: "#fff",
+                  border: "none",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  boxShadow: "0 10px 30px rgba(92,29,38,0.18)",
                 }}
               >
                 Request Service <ArrowRight size={18} />
               </button>
+
               <a
                 href={PHONE_HREF}
                 style={{
                   padding: "16px 36px",
                   borderRadius: 14,
                   fontSize: "1rem",
-                  border: "2px solid rgba(187,135,68,0.4)",
-                  color: "#f0d5a0",
+                  border: "2px solid rgba(92,29,38,0.2)",
+                  color: "#5c1d26",
                   fontWeight: 700,
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 8,
                   textDecoration: "none",
-                  transition: "border-color 0.2s, background 0.2s",
+                  transition: "all 0.3s ease",
+                  background: "rgba(255,255,255,0.35)",
+                  backdropFilter: "blur(10px)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(187,135,68,0.12)";
-                  e.currentTarget.style.borderColor = "rgba(187,135,68,0.7)";
+                  e.currentTarget.style.background = "rgba(92,29,38,0.08)";
+                  e.currentTarget.style.borderColor = "#5c1d26";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.borderColor = "rgba(187,135,68,0.4)";
+                  e.currentTarget.style.background = "rgba(255,255,255,0.35)";
+                  e.currentTarget.style.borderColor = "rgba(92,29,38,0.2)";
                 }}
               >
                 <Phone size={18} /> {PHONE_DISPLAY}
               </a>
             </div>
 
-            {/* Quick stats inline */}
+            {/* Quick stats */}
             <div style={{ display: "flex", flexWrap: "wrap", gap: 32 }}>
               {[
-                ["500+", "Families"],
-                ["10+", "Years"],
-                ["24×7", "Support"],
-                ["NCR", "Coverage"],
+                ["500+", "Families Served"],
+                ["10+", "Years Experience"],
+                ["24×7", "Emergency Support"],
+                ["NCR", "Coverage Area"],
               ].map(([n, l]) => (
                 <div key={l}>
                   <div
                     className="display"
                     style={{
                       fontSize: "1.8rem",
-                      fontWeight: 700,
-                      color: "#bb8744",
+                      fontWeight: 800,
+                      color: "#8b2f3b",
+                      marginBottom: 4,
                     }}
                   >
                     {n}
                   </div>
+
                   <div
                     style={{
                       fontSize: "0.78rem",
-                      color: "rgba(240,213,160,0.6)",
+                      color: "rgba(92,29,38,0.75)",
                       textTransform: "uppercase",
                       letterSpacing: "0.08em",
                       fontWeight: 700,
@@ -612,27 +648,7 @@ export default function OmAntimNiwasSite() {
             alignItems: "center",
             gap: 8,
           }}
-        >
-          <span
-            style={{
-              color: "rgba(187,135,68,0.5)",
-              fontSize: "0.7rem",
-              textTransform: "uppercase",
-              letterSpacing: "0.15em",
-              fontWeight: 700,
-            }}
-          >
-            Scroll
-          </span>
-          <div
-            style={{
-              width: 1,
-              height: 40,
-              background:
-                "linear-gradient(to bottom, rgba(187,135,68,0.5), transparent)",
-            }}
-          />
-        </div>
+        ></div>
       </section>
 
       {/* ═══════ MARQUEE STRIP ═══════ */}
@@ -988,7 +1004,7 @@ export default function OmAntimNiwasSite() {
         id="services"
         style={{
           padding: "100px 0",
-          background: "#5c1d26",
+          background: "#f0d5a0",
           position: "relative",
           overflow: "hidden",
         }}
@@ -999,10 +1015,11 @@ export default function OmAntimNiwasSite() {
             position: "absolute",
             inset: 0,
             backgroundImage:
-              "radial-gradient(rgba(187,135,68,0.06) 1px, transparent 1px)",
+              "radial-gradient(rgba(92,29,38,0.06) 1px, transparent 1px)",
             backgroundSize: "28px 28px",
           }}
         />
+
         <div
           style={{
             position: "absolute",
@@ -1011,7 +1028,7 @@ export default function OmAntimNiwasSite() {
             width: 500,
             height: 500,
             background:
-              "radial-gradient(circle, rgba(187,135,68,0.08) 0%, transparent 65%)",
+              "radial-gradient(circle, rgba(92,29,38,0.08) 0%, transparent 65%)",
           }}
         />
 
@@ -1029,7 +1046,7 @@ export default function OmAntimNiwasSite() {
             <div
               className="ornament reveal"
               style={{
-                color: "#bb8744",
+                color: "#5c1d26",
                 fontSize: "0.75rem",
                 fontWeight: 700,
                 letterSpacing: "0.15em",
@@ -1040,22 +1057,23 @@ export default function OmAntimNiwasSite() {
             >
               Professional Services
             </div>
+
             <h2
               className="display reveal"
               style={{
                 fontSize: "clamp(2.2rem, 5vw, 3.8rem)",
                 fontWeight: 900,
-                color: "#f0d5a0",
+                color: "#5c1d26",
                 lineHeight: 1.15,
               }}
             >
               Everything Your Family
               <br />
-              <span style={{ color: "#bb8744" }}>Needs, Arranged for You</span>
+              <span style={{ color: "#8b2f3b" }}>Needs, Arranged for You</span>
             </h2>
           </div>
 
-          {/* Services grid — 3-col with left accent bar */}
+          {/* Services Grid */}
           <div
             style={{
               display: "grid",
@@ -1068,24 +1086,26 @@ export default function OmAntimNiwasSite() {
                 key={i}
                 className={`svc-card reveal d${(i % 6) + 1}`}
                 style={{
-                  background: "rgba(255,251,245,0.04)",
-                  border: "1px solid rgba(187,135,68,0.2)",
+                  background: "rgba(255,255,255,0.45)",
+                  backdropFilter: "blur(10px)",
+                  border: "1px solid rgba(92,29,38,0.15)",
                   borderRadius: 20,
                   padding: "32px 28px",
                   position: "relative",
                   overflow: "hidden",
+                  boxShadow: "0 10px 30px rgba(92,29,38,0.08)",
                 }}
               >
-                {/* Left accent bar */}
+                {/* Left Accent */}
                 <div
                   style={{
                     position: "absolute",
                     left: 0,
                     top: 24,
                     bottom: 24,
-                    width: 3,
+                    width: 4,
                     background:
-                      "linear-gradient(to bottom, #bb8744, rgba(187,135,68,0.2))",
+                      "linear-gradient(to bottom, #5c1d26, rgba(92,29,38,0.2))",
                     borderRadius: "0 4px 4px 0",
                   }}
                 />
@@ -1093,33 +1113,36 @@ export default function OmAntimNiwasSite() {
                 <div style={{ fontSize: "2.5rem", marginBottom: 16 }}>
                   {s.icon}
                 </div>
+
                 <div
                   style={{
                     fontSize: "0.7rem",
                     fontWeight: 700,
                     letterSpacing: "0.12em",
                     textTransform: "uppercase",
-                    color: "#bb8744",
+                    color: "#8b2f3b",
                     marginBottom: 8,
                   }}
                 >
                   {s.subtitle}
                 </div>
+
                 <h3
                   className="display"
                   style={{
                     fontSize: "1.5rem",
                     fontWeight: 700,
-                    color: "#f0d5a0",
+                    color: "#5c1d26",
                     marginBottom: 12,
                   }}
                 >
                   {s.title}
                 </h3>
+
                 <p
                   style={{
-                    fontSize: "0.9rem",
-                    color: "rgba(240,213,160,0.6)",
+                    fontSize: "0.95rem",
+                    color: "rgba(92,29,38,0.75)",
                     lineHeight: 1.7,
                   }}
                 >
@@ -1141,6 +1164,10 @@ export default function OmAntimNiwasSite() {
                 padding: "18px 48px",
                 borderRadius: 16,
                 fontSize: "1.05rem",
+                background: "#5c1d26",
+                color: "#fff",
+                border: "none",
+                cursor: "pointer",
               }}
             >
               Request Assistance <ArrowRight size={20} />
@@ -1221,27 +1248,33 @@ export default function OmAntimNiwasSite() {
               {[
                 {
                   num: "01",
-                  icon: "⚡",
-                  title: "Instant Response",
-                  desc: "Our team mobilises within minutes of your call, any time — day or night.",
+                  icon: <Zap size={28} strokeWidth={2} color="#5c1d26" />,
+                  title: "24×7 Immediate Assistance",
+                  desc: "Our team is available round the clock to provide quick support whenever your family needs us.",
                 },
                 {
                   num: "02",
-                  icon: "🛡️",
-                  title: "Transparent Pricing",
-                  desc: "No hidden costs, no pressure. Clear, compassionate consultation upfront.",
+                  icon: (
+                    <ShieldCheck size={28} strokeWidth={2} color="#5c1d26" />
+                  ),
+                  title: "Respectful & Transparent Service",
+                  desc: "Every ritual and arrangement is handled with dignity, honesty, and complete transparency.",
                 },
                 {
                   num: "03",
-                  icon: "🕊️",
-                  title: "All Communities Welcome",
-                  desc: "Hindu, Muslim, Sikh, Christian — every tradition handled with equal respect.",
+                  icon: (
+                    <HeartHandshake size={28} strokeWidth={2} color="#5c1d26" />
+                  ),
+                  title: "Support for Every Tradition",
+                  desc: "We carefully arrange ceremonies and rituals according to your family’s customs and beliefs.",
                 },
                 {
                   num: "04",
-                  icon: "📋",
-                  title: "End-to-End Care",
-                  desc: "Transport, rituals, documentation, ash collection — nothing left for you to arrange alone.",
+                  icon: (
+                    <ClipboardList size={28} strokeWidth={2} color="#5c1d26" />
+                  ),
+                  title: "Complete End-to-End Arrangements",
+                  desc: "From transportation and documentation to rituals and final arrangements, we take care of everything.",
                 },
               ].map((f, i) => (
                 <div
@@ -1279,9 +1312,9 @@ export default function OmAntimNiwasSite() {
                   >
                     {f.num}
                   </div>
-                  <div style={{ fontSize: "1.6rem", minWidth: 32 }}>
-                    {f.icon}
-                  </div>
+
+                  <div style={{ minWidth: 32, marginTop: 2 }}>{f.icon}</div>
+
                   <div>
                     <div
                       style={{
@@ -1293,6 +1326,7 @@ export default function OmAntimNiwasSite() {
                     >
                       {f.title}
                     </div>
+
                     <div
                       style={{
                         fontSize: "0.9rem",
@@ -2039,10 +2073,10 @@ export default function OmAntimNiwasSite() {
                 {/* Logo */}
                 <div
                   style={{
-                    width: 52,
-                    height: 52,
+                    width: 82,
+                    height: 62,
                     borderRadius: 16,
-                    background: "rgba(187,135,68,0.15)",
+                    background: "#bb8744",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -2276,37 +2310,6 @@ export default function OmAntimNiwasSite() {
           </div>
         </div>
       </footer>
-
-      {/* Sticky call bar — mobile */}
-      <div
-        style={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          zIndex: 200,
-          display: "none",
-        }}
-        className="sticky-call"
-      >
-        <a
-          href={PHONE_HREF}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 12,
-            background: "linear-gradient(90deg, #5c1d26, #7a2833)",
-            color: "#f0d5a0",
-            fontWeight: 800,
-            fontSize: "1rem",
-            padding: "16px",
-            textDecoration: "none",
-          }}
-        >
-          <Phone size={20} /> Call Now: {PHONE_DISPLAY}
-        </a>
-      </div>
 
       <style>{`
         @media (max-width: 768px) {
