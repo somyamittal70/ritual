@@ -70,9 +70,9 @@ export default function OmAntimNiwasSite() {
     },
     {
       icon: <FileText size={42} strokeWidth={1.8} color="#5c1d26" />,
-      subtitle: "Documentation",
-      title: "Death Certificate Assistance",
-      desc: "Guidance and support for obtaining death certificates and completing essential documentation processes.",
+      subtitle: "Prayer Services",
+      title: "Memorial Prayer Gatherings",
+      desc: "Arrangements for prayer meetings and remembrance ceremonies to honor the departed soul.",
     },
     {
       icon: <Users size={42} strokeWidth={1.8} color="#5c1d26" />,
@@ -100,44 +100,6 @@ export default function OmAntimNiwasSite() {
     },
   ];
 
-  const Services = [
-    {
-      icon: <Scale size={42} strokeWidth={1.8} color="#5c1d26" />,
-      subtitle: "Funeral Planning",
-      title: "Complete Last Rites Arrangements",
-      desc: "Comprehensive support for organizing traditional and dignified funeral ceremonies with care and respect.",
-    },
-    {
-      icon: <FileText size={42} strokeWidth={1.8} color="#5c1d26" />,
-      subtitle: "Documentation",
-      title: "Death Certificate Assistance",
-      desc: "Guidance and support for obtaining death certificates and completing essential documentation processes.",
-    },
-    {
-      icon: <Users size={42} strokeWidth={1.8} color="#5c1d26" />,
-      subtitle: "Family Support",
-      title: "Compassionate Guidance",
-      desc: "Dedicated assistance to help families navigate difficult times with understanding and empathy.",
-    },
-    {
-      icon: <ShieldCheck size={42} strokeWidth={1.8} color="#5c1d26" />,
-      subtitle: "Memorial Services",
-      title: "Respectful Ceremonies",
-      desc: "Thoughtfully arranged memorial and prayer services to honor and celebrate the life of your loved one.",
-    },
-    {
-      icon: <Briefcase size={42} strokeWidth={1.8} color="#5c1d26" />,
-      subtitle: "Ritual Services",
-      title: "Traditional Ritual Assistance",
-      desc: "Support for performing religious and cultural rituals according to family traditions and beliefs.",
-    },
-    {
-      icon: <Landmark size={42} strokeWidth={1.8} color="#5c1d26" />,
-      subtitle: "Cremation Services",
-      title: "End-to-End Arrangements",
-      desc: "Professional coordination of cremation and related ceremonies with dignity, respect, and care.",
-    },
-  ];
   const faqs = [
     {
       q: "Are services really available 24 hours?",
